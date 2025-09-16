@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка EmailJS для формы</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .step { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .code { background: #000; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>📧 Настройка EmailJS для формы записи</h1>
+    
+    <div class="step">
+        <h2>Шаг 1: Регистрация в EmailJS</h2>
+        <p>1. Перейдите на <a href="https://www.emailjs.com/" target="_blank">emailjs.com</a></p>
+        <p>2. Зарегистрируйтесь или войдите в аккаунт</p>
+        <p>3. Создайте новый сервис (Gmail, Outlook, etc.)</p>
+    </div>
+    
+    <div class="step">
+        <h2>Шаг 2: Создание шаблона</h2>
+        <p>Создайте шаблон с полями:</p>
+        <div class="code">
+from_name: {{from_name}}
+from_phone: {{from_phone}}
+from_email: {{from_email}}
+level: {{level}}
+hall: {{hall}}
+day: {{day}}
+message: {{message}}
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Шаг 3: Получение ключей</h2>
+        <p>Скопируйте:</p>
+        <ul>
+            <li>Service ID</li>
+            <li>Template ID</li>
+            <li>Public Key</li>
+        </ul>
+    </div>
+    
+    <div class="step">
+        <h2>Шаг 4: Обновление кода</h2>
+        <p>Замените в файле <code>form-fallback.js</code>:</p>
+        <div class="code">
+const EMAILJS_SERVICE_ID = 'ваш_service_id';
+const EMAILJS_TEMPLATE_ID = 'ваш_template_id';
+const EMAILJS_PUBLIC_KEY = 'ваш_public_key';
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Шаг 5: Подключение к HTML</h2>
+        <p>Добавьте в <code>index.html</code> перед закрывающим тегом <code>&lt;/body&gt;</code>:</p>
+        <div class="code">
+&lt;script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"&gt;&lt;/script&gt;
+&lt;script src="form-fallback.js"&gt;&lt;/script&gt;
+        </div>
+    </div>
+    
+    <div class="warning">
+        <h3>⚠️ Важно!</h3>
+        <p>EmailJS бесплатно позволяет отправлять до 200 писем в месяц. Для большего объема нужен платный план.</p>
+    </div>
+    
+    <div class="step">
+        <h2>🎯 Готово!</h2>
+        <p>После настройки форма будет отправлять письма на ваш email: <strong>evgenijurin998@gmail.com</strong></p>
+    </div>
+</body>
+</html>

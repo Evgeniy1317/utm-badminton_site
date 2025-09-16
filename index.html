@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DTM Badminton Club - Запись на тренировки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>">
+</head>
+<body>
+
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="container">
+      <div class="logo-section">
+        <a href="#hero" class="logo-link">
+          <img src="css/img/ChatGPT Image 10 сент. 2025 г., 23_26_04.png" alt="DTM Logo" class="utm-logo-img">
+        </a>
+        <h1 class="logo-text">Badminton Club</h1>
+      </div>
+      
+      <div class="header-bottom">
+        <nav class="nav">
+        <a href="#about">О нас</a>
+        <a href="#trainer">Тренер</a>
+        <a href="#halls">Залы</a>
+        <a href="#schedule">Расписание</a>
+        <a href="#booking">Запись</a>
+        <a href="#tournaments">Турниры<span class="notification-badge" id="tournamentBadge">1</span></a>
+        <a href="#rating">Рейтинг</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#history">История</a>
+        <a href="#contact">Контакты</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      
+      <!-- Мобильное меню -->
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </div>
+      
+      <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+          <a href="#about" class="mobile-nav-link">О нас</a>
+          <a href="#trainer" class="mobile-nav-link">Тренер</a>
+          <a href="#halls" class="mobile-nav-link">Залы</a>
+          <a href="#schedule" class="mobile-nav-link">Расписание</a>
+          <a href="#booking" class="mobile-nav-link">Запись</a>
+          <a href="#tournaments" class="mobile-nav-link">Турниры<span class="notification-badge mobile-notification" id="mobileTournamentBadge">1</span></a>
+          <a href="#rating" class="mobile-nav-link">Рейтинг</a>
+          <a href="#gallery" class="mobile-nav-link">Галерея</a>
+          <a href="#history" class="mobile-nav-link">История</a>
+          <a href="#contact" class="mobile-nav-link">Контакты</a>
+          <a href="#faq" class="mobile-nav-link">FAQ</a>
+        </nav>
+      </div>
+      
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      
+      <div class="header-controls">
+        <div class="theme-switcher">
+          <button class="theme-btn" id="themeToggle" title="Переключить тему">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+        
+        <div class="language-switcher">
+          <button class="lang-trigger" id="langTrigger">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU" class="current-flag">
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option active" data-lang="ru">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU">
+              <span>Русский</span>
+            </button>
+            <button class="lang-option" data-lang="ro">
+              <img src="css/img/321210.png" alt="RO">
+              <span>Română</span>
+            </button>
+            <button class="lang-option" data-lang="en">
+              <img src="css/img/Flag_of_the_United_Kingdom.png" alt="EN">
+              <span>English</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Главная секция -->
+  <section id="hero" class="hero">
+    <video class="hero-video" 
+           muted 
+           loop 
+           autoplay
+           playsinline 
+           preload="auto" 
+           webkit-playsinline="true"
+           x5-video-player-type="h5"
+           x5-video-player-fullscreen="true"
+           x5-video-orientation="portrait"
+           controls="false"
+           disablepictureinpicture
+           controlslist="nodownload nofullscreen noremoteplayback"
+           disableRemotePlayback
+           poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+           style="display: block;">
+      <source src="video/IMG_3744--online-audio-convert.com.mp4" type="video/mp4">
+      <source src="video/IMG_3744--online-audio-convert.com.mp4" type="video/quicktime">
+      Ваш браузер не поддерживает видео.
+    </video>
+    <div class="hero-fallback" style="display: none;">
+      <div class="hero-bg-image"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <button class="video-play-btn" id="videoPlayBtn" style="display: none;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="5,3 19,12 5,21"></polygon>
+      </svg>
+    </button>
+    <div class="container">
+      <div class="hero-content">
+        <h1 id="hero-title"></h1>
+        <p id="hero-subtitle"></p>
+        <a href="#booking" class="cta-button" id="hero-btn"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О нас -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">О нас</h2>
+      <div class="about-content animate-on-scroll">
+        <div class="about-text">
+          <p>DTM Badminton Club — это место, где страсть к бадминтону встречается с профессиональным подходом к обучению. Мы создали уникальную атмосферу для развития ваших навыков и достижения новых высот в этом удивительном виде спорта.</p>
+          <p>Наша миссия — сделать бадминтон доступным для всех, независимо от возраста и уровня подготовки. Мы верим, что каждый может найти в этом спорте что-то особенное для себя.</p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">💪</div>
+            <h3>Физическое развитие</h3>
+            <p>Улучшение координации, выносливости и силы</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🧠</div>
+            <h3>Ментальная тренировка</h3>
+            <p>Развитие стратегического мышления и концентрации</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">👥</div>
+            <h3>Социализация</h3>
+            <p>Новые знакомства и дружеская атмосфера</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🏆</div>
+            <h3>Достижения</h3>
+            <p>Возможность участвовать в турнирах и соревнованиях</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Тренер -->
+  <section id="trainer" class="trainer">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Наш тренер</h2>
+      <div class="trainer-content animate-on-scroll">
+        <div class="trainer-photo">
+          <img src="css/img/photo_5334684101774539093_y.jpg" alt="Sturza Anzor - тренер по бадминтону" class="trainer-img">
+        </div>
+        <div class="trainer-info">
+          <h3>Sturza Anzor</h3>
+          <p>Sturza Anzor — активный игрок на профессиональном уровне, который делится своим опытом и любовью к бадминтону. Он хорошо понимает, с чего начать и как быстро прогрессировать, ведь сам прошёл этот путь.</p>
+          <p>Anzor создаёт дружескую атмосферу на тренировках, помогает каждому участнику освоить технику и почувствовать уверенность на корте. Его цель — чтобы бадминтон приносил радость, энергию и новые знакомства.</p>
+          <div class="trainer-stats">
+            <div class="stat-item">
+              <span class="stat-number">🎯</span>
+              <span class="stat-label">Индивидуальный подход</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">🏸</span>
+              <span class="stat-label">Современные техники и практика</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">🤝</span>
+              <span class="stat-label">Дружеская атмосфера</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">⚡</span>
+              <span class="stat-label">Тренировки для всех уровней</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Залы -->
+  <section id="halls" class="halls">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Наши залы</h2>
+      <div class="halls-grid animate-on-scroll">
+        <div class="hall-card">
+          <div class="hall-image">
+            <img src="css/img/photo_5267307682786831695_c.jpg" alt="Зал №1 - Спортивный комплекс UTM" class="hall-img">
+          </div>
+          <div class="hall-content">
+            <h3 class="hall-title">Зал №1</h3>
+            <span class="hall-status status-available">Доступен</span>
+            <div class="hall-info">
+              <p>Современный спортивный комплекс с двумя профессиональными площадками для бадминтона. Качественное покрытие, отличное освещение и комфортные условия для тренировок.</p>
+            </div>
+            <div class="hall-address">
+              <div class="address-line">CS UTM, sect. BOTANICA, str. DACIA 41/1</div>
+            </div>
+            <div class="location-btn-container">
+              <a href="https://maps.google.com/?q=CS+UTM+sect+BOTANICA+str+DACIA+41/1+Chisinau" class="location-btn" target="_blank">
+                📍 Посмотреть на карте
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="hall-card">
+          <div class="hall-image">
+            <img src="css/img/photo_5289744394372640841_y.jpg" alt="Зал №2 - Новый комплекс" class="hall-img">
+          </div>
+          <div class="hall-content">
+            <h3 class="hall-title">Зал №2</h3>
+            <span class="hall-status status-coming-soon">Скоро откроется</span>
+            <div class="hall-info">
+              <p>Современный зал с новым ремонтом и покрытием. 4 профессиональные площадки для бадминтона. Увеличенные размеры, улучшенное освещение и комфортные условия для тренировок.</p>
+            </div>
+            <div class="hall-address">
+              <div class="address-line">CS UTM, RÎSCANI, str. Studenților 3/8</div>
+            </div>
+            <div class="location-btn-container">
+              <a href="https://maps.google.com/?q=CS+UTM+sectorul+RISCANI+str+Studentilor+3/8+Chisinau" class="location-btn" target="_blank">
+                📍 Посмотреть на карте
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Расписание -->
+  <section id="schedule" class="schedule">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Расписание тренировок</h2>
+      <div class="schedule-grid animate-on-scroll">
+        <div class="schedule-card">
+          <div class="day-name">Понедельник</div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name">Вторник</div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name">Среда</div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name">Суббота</div>
+          <div class="time-slot">10:00 - 12:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name">Воскресенье</div>
+          <div class="time-slot">10:00 - 12:00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Форма записи -->
+  <section id="booking" class="booking">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Записаться на тренировку</h2>
+      <div class="booking-form animate-on-scroll">
+        <div class="success-message" id="successMessage">
+          ✅ Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.
+        </div>
+        
+        <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <!-- Скрытое поле для защиты от ботов -->
+          <div style="display: none;">
+            <label>Не заполняйте это поле: <input name="bot-field"></label>
+          </div>
+          <div class="form-group">
+            <label for="name">Имя и фамилия *</label>
+            <input type="text" id="name" name="name" required>
+            <div class="error-message" id="nameError">Пожалуйста, введите ваше имя и фамилию</div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Телефон *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+373 XX XXX XXX" required>
+            <div class="error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+            <div class="error-message" id="emailError">Пожалуйста, введите корректный email</div>
+          </div>
+
+          <div class="form-group">
+            <label for="level">Уровень игры</label>
+            <select id="level" name="level">
+              <option value="beginner">Новичок</option>
+              <option value="intermediate">Средний</option>
+              <option value="advanced">Продвинутый</option>
+              <option value="professional">Профессионал</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="hall">Выберите зал</label>
+            <select id="hall" name="hall">
+              <option value="hall1">Зал №1 (Доступен)</option>
+              <option value="hall2" disabled>Зал №2 (Скоро откроется)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="day">Предпочтительный день</label>
+            <select id="day" name="day">
+              <option value="monday">Понедельник</option>
+              <option value="tuesday">Вторник</option>
+              <option value="wednesday">Среда</option>
+              <option value="thursday">Четверг</option>
+              <option value="friday">Пятница</option>
+              <option value="saturday">Суббота</option>
+              <option value="sunday">Воскресенье</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Дополнительная информация</label>
+            <textarea id="message" name="message" rows="4" placeholder="Расскажите о ваших целях, опыте или особых пожеланиях..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Турниры -->
+  <section id="tournaments" class="tournaments">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Предстоящие турниры</h2>
+      <div class="tournaments-grid">
+        <div class="tournament-card">
+          <div class="tournament-poster">
+            <img src="css/img/photo_5328311680272301799_y.jpg" alt="Афиша турнира" class="tournament-image">
+            <div class="tournament-overlay">
+              <div class="tournament-info">
+                <h3>🏆 Турнир по бадминтону</h3>
+                <p>Надо готовиться и участвоваться в турнире</p>
+                <div class="tournament-address">
+                  <p>📍 Complex Sportiv UPS, str. Ion Creangă 1/2</p>
+                </div>
+                <a href="https://www.tournamentsoftware.com/tournament/D7399B86-1128-4385-9339-F5A9B7BAE100?fbclid=IwVERDUAMv2RpleHRuA2FlbQIxMAABHqtbOLGnGnrj8yKvzojkttlNt-1-Kllaz48qFW3pSUfvCpISFpKuCM4IxXje_aem_YtMyctfBk-DwzBT3Bg65GA" class="tournament-website-btn" target="_blank">🏸 Сайт турнира</a>
+                <a href="https://maps.google.com/?q=Complex+Sportiv+UPS,+str.+Ion+Creangă+1/2" class="tournament-map-btn" target="_blank">🗺️ Посмотреть на карте</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Рейтинг игроков -->
+  <section id="rating" class="rating">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Рейтинг игроков</h2>
+      <div class="rating-content animate-on-scroll">
+        <div class="rating-description">
+          <p>Текущий рейтинг игроков DTM Badminton Club. Рейтинг обновляется после каждого турнира и тренировки.</p>
+        </div>
+        
+        <div class="rating-table-container">
+          <table class="rating-table">
+            <thead>
+              <tr>
+                <th class="rank-col">#</th>
+                <th class="player-col">Игрок</th>
+                <th class="points-col">Очки</th>
+                <th class="matches-col">Матчи</th>
+                <th class="wins-col">Победы</th>
+                <th class="winrate-col">% побед</th>
+                <th class="trend-col">Тренд</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="rating-row gold">
+                <td class="rank">1</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">👑</div>
+                    <div class="player-details">
+                      <div class="player-name">Sturza Anzor</div>
+                      <div class="player-level">Профессионал</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">2450</td>
+                <td class="matches">28</td>
+                <td class="wins">24</td>
+                <td class="winrate">85.7%</td>
+                <td class="trend trend-up">↗ +15</td>
+              </tr>
+              <tr class="rating-row silver">
+                <td class="rank">2</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🥈</div>
+                    <div class="player-details">
+                      <div class="player-name">Александр Петров</div>
+                      <div class="player-level">Продвинутый</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">2180</td>
+                <td class="matches">25</td>
+                <td class="wins">20</td>
+                <td class="winrate">80.0%</td>
+                <td class="trend trend-up">↗ +8</td>
+              </tr>
+              <tr class="rating-row bronze">
+                <td class="rank">3</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🥉</div>
+                    <div class="player-details">
+                      <div class="player-name">Мария Козлова</div>
+                      <div class="player-level">Продвинутый</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1950</td>
+                <td class="matches">22</td>
+                <td class="wins">17</td>
+                <td class="winrate">77.3%</td>
+                <td class="trend trend-up">↗ +12</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">4</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Дмитрий Иванов</div>
+                      <div class="player-level">Средний</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1720</td>
+                <td class="matches">20</td>
+                <td class="wins">14</td>
+                <td class="winrate">70.0%</td>
+                <td class="trend trend-down">↘ -3</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">5</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Елена Смирнова</div>
+                      <div class="player-level">Средний</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1580</td>
+                <td class="matches">18</td>
+                <td class="wins">12</td>
+                <td class="winrate">66.7%</td>
+                <td class="trend trend-up">↗ +5</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">6</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Андрей Волков</div>
+                      <div class="player-level">Средний</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1450</td>
+                <td class="matches">16</td>
+                <td class="wins">10</td>
+                <td class="winrate">62.5%</td>
+                <td class="trend trend-up">↗ +7</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">7</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Ольга Новикова</div>
+                      <div class="player-level">Средний</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1320</td>
+                <td class="matches">15</td>
+                <td class="wins">9</td>
+                <td class="winrate">60.0%</td>
+                <td class="trend trend-stable">→ 0</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">8</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Сергей Морозов</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1180</td>
+                <td class="matches">14</td>
+                <td class="wins">8</td>
+                <td class="winrate">57.1%</td>
+                <td class="trend trend-up">↗ +10</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">9</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Анна Кузнецова</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">1050</td>
+                <td class="matches">12</td>
+                <td class="wins">6</td>
+                <td class="winrate">50.0%</td>
+                <td class="trend trend-up">↗ +3</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">10</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Игорь Лебедев</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">920</td>
+                <td class="matches">11</td>
+                <td class="wins">5</td>
+                <td class="winrate">45.5%</td>
+                <td class="trend trend-down">↘ -2</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">11</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Татьяна Федорова</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">850</td>
+                <td class="matches">10</td>
+                <td class="wins">4</td>
+                <td class="winrate">40.0%</td>
+                <td class="trend trend-up">↗ +6</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">12</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Владимир Соколов</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">780</td>
+                <td class="matches">9</td>
+                <td class="wins">3</td>
+                <td class="winrate">33.3%</td>
+                <td class="trend trend-stable">→ 0</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">13</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Наталья Попова</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">720</td>
+                <td class="matches">8</td>
+                <td class="wins">3</td>
+                <td class="winrate">37.5%</td>
+                <td class="trend trend-up">↗ +4</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">14</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Роман Васильев</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">650</td>
+                <td class="matches">7</td>
+                <td class="wins">2</td>
+                <td class="winrate">28.6%</td>
+                <td class="trend trend-down">↘ -1</td>
+              </tr>
+              <tr class="rating-row">
+                <td class="rank">15</td>
+                <td class="player">
+                  <div class="player-info">
+                    <div class="player-avatar">🏸</div>
+                    <div class="player-details">
+                      <div class="player-name">Юлия Орлова</div>
+                      <div class="player-level">Новичок</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="points">580</td>
+                <td class="matches">6</td>
+                <td class="wins">2</td>
+                <td class="winrate">33.3%</td>
+                <td class="trend trend-up">↗ +2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="rating-info">
+          <div class="rating-rules">
+            <h3>Правила рейтинга</h3>
+            <div class="rating-categories">
+              <div class="category-section">
+                <h4>🏆 Категория Open (мастера)</h4>
+                <ul>
+                  <li>🥇 1-е место: +100 очков</li>
+                  <li>🥈 2-е место: +70 очков</li>
+                  <li>🥉 3-е место: +50 очков</li>
+                  <li>🏸 За участие: +20 очков</li>
+                </ul>
+              </div>
+              
+              <div class="category-section">
+                <h4>🥇 Категория A</h4>
+                <ul>
+                  <li>🥇 1-е место: +50 очков</li>
+                  <li>🥈 2-е место: +40 очков</li>
+                  <li>🥉 3-е место: +30 очков</li>
+                </ul>
+              </div>
+              
+              <div class="category-section">
+                <h4>🥈 Категория B</h4>
+                <ul>
+                  <li>🥇 1-е место: +40 очков</li>
+                  <li>🥈 2-е место: +30 очков</li>
+                  <li>🥉 3-е место: +20 очков</li>
+                </ul>
+              </div>
+              
+              <div class="category-section">
+                <h4>🏸 Категория C (новички)</h4>
+                <ul>
+                  <li>🥇 1-е место: +30 очков</li>
+                  <li>🥈 2-е место: +20 очков</li>
+                  <li>🥉 3-е место: +10 очков</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="rating-update">
+            <p><strong>Последнее обновление:</strong> 15 января 2025</p>
+            <p><strong>Следующее обновление:</strong> После турнира 19 октября</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Галерея -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Галерея</h2>
+      <div class="gallery-grid">
+        <div class="gallery-placeholder">
+          <h3>Фотографии с тренировок</h3>
+          <p>Скоро здесь появятся фото с наших тренировок и турниров</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- История бадминтона -->
+  <section id="history" class="history">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">История бадминтона</h2>
+      
+      <div class="history-content">
+        <!-- Основная информация -->
+        <div class="history-intro animate-on-scroll">
+          <div class="history-text">
+            <h3>🏸 Происхождение игры</h3>
+            <p>Бадминтон - одна из самых древних игр с ракеткой. Его история насчитывает более 2000 лет! Игра зародилась в Древней Греции, где называлась "баттлдор и шаттлкок", а затем распространилась по всему миру.</p>
+            <p>Современный бадминтон получил свое название от английского поместья Бадминтон-хаус, где в 1873 году герцог Бофорт организовал первую демонстрацию игры.</p>
+          </div>
+          <div class="history-image">
+            <div class="history-photo">
+              <img src="css/img/i (1).webp" alt="Древние корни бадминтона" class="court-photo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Интересные факты -->
+        <div class="facts-section animate-on-scroll">
+          <h3>🎯 Интересные факты</h3>
+          <div class="facts-grid">
+            <div class="fact-card">
+              <div class="fact-icon">⚡</div>
+              <h4>Самый быстрый спорт</h4>
+              <p>Воланы в бадминтоне могут развивать скорость до 493 км/ч - это быстрее, чем в любом другом виде спорта!</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🌍</div>
+              <h4>Олимпийский статус</h4>
+              <p>Бадминтон стал олимпийским видом спорта в 1992 году в Барселоне. С тех пор он завоевал сердца миллионов зрителей.</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🏆</div>
+              <h4>Популярность в мире</h4>
+              <p>Бадминтон занимает второе место по популярности в мире после футбола, в него играют более 220 миллионов человек!</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🧠</div>
+              <h4>Польза для здоровья</h4>
+              <p>Игра в бадминтон сжигает до 450 калорий в час и улучшает координацию, реакцию и выносливость.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правила и основы -->
+        <div class="rules-section animate-on-scroll">
+          <h3>📋 Что нужно знать о бадминтоне</h3>
+          <div class="rules-content">
+            <div class="rules-text">
+              <h4>🎾 Основные правила:</h4>
+              <ul>
+                <li><strong>Цель игры:</strong> Перебросить волан через сетку так, чтобы соперник не смог его отбить</li>
+                <li><strong>Счет:</strong> Игра ведется до 21 очка, разница должна быть минимум 2 очка</li>
+                <li><strong>Подача:</strong> Должна выполняться снизу, волан должен попасть в диагональное поле соперника</li>
+                <li><strong>Очки:</strong> Засчитываются при ошибке соперника или когда волан падает на его половине</li>
+              </ul>
+              
+              <h4>🏸 Экипировка:</h4>
+              <ul>
+                <li><strong>Ракетка:</strong> Вес 80-100 грамм, длина до 68 см</li>
+                <li><strong>Волан:</strong> 16 перьев или синтетический, вес 4.74-5.50 грамм</li>
+                <li><strong>Сетка:</strong> Высота 1.55 м, ширина 6.1 м</li>
+                <li><strong>Корт:</strong> 13.4×6.1 м для одиночной игры, 13.4×5.18 м для парной</li>
+              </ul>
+            </div>
+            <div class="rules-image">
+              <div class="history-photo">
+                <img src="css/img/badmintonbane1.jpg" alt="Размеры корта и правила бадминтона" class="court-photo badminton-court-photo">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Контакты</h2>
+      <div class="contact-content animate-on-scroll">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text">
+              <h4>Телефон</h4>
+              <p><a href="tel:+37368851307" class="phone-link">+373 68 851 307</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:evgenijurin998@gmail.com" class="email-link">evgenijurin998@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              <h4>Адрес</h4>
+              <p><a href="https://maps.google.com/?q=CS+UTM+sect+BOTANICA+str+DACIA+41/1+Chisinau" class="address-link" target="_blank">CS UTM, sect. BOTANICA, str. DACIA 41/1</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <div class="contact-text">
+              <h4>Время работы</h4>
+              <p><span class="hours-text">Пн-Ср: 18:30-21:00<br>Сб-Вс: 10:00-12:00</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info">
+          <h3>Свяжитесь с тренером</h3>
+          <p>Для быстрой связи и получения консультации по тренировкам, свяжитесь с нашим тренером:</p>
+          
+          <div class="social-links">
+            <a href="https://t.me/qweqweqweeqwe" class="social-link telegram-link" target="_blank">
+              💬 Написать в Telegram
+            </a>
+            <a href="https://www.instagram.com/jenyaa_u/" class="social-link instagram-link" target="_blank">
+              📷 Instagram
+            </a>
+            <a href="viber://chat?number=+37368851307" class="social-link viber-link" target="_blank">
+              💜 Написать в Viber
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Часто задаваемые вопросы</h2>
+      <div class="faq-content animate-on-scroll">
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏸 С какого возраста можно заниматься бадминтоном?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Бадминтон подходит для всех возрастов! Мы принимаем детей от 8 лет и взрослых любого возраста. Для детей младше 8 лет предлагаем специальные программы развития координации.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>💰 Сколько стоит тренировка?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Стоимость одной тренировки составляет 50 лей. При покупке абонемента на месяц стоимость снижается до 35 лей за тренировку. Первое занятие - бесплатно!</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🎒 Что нужно принести на первую тренировку?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Для первой тренировки достаточно спортивной одежды и кроссовок. Ракетки и воланы мы предоставляем бесплатно. Рекомендуем взять с собой воду.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>👥 Сколько человек в группе?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>В группах для начинающих максимум 8 человек, для продвинутых - до 6 человек. Это позволяет тренеру уделить внимание каждому ученику и обеспечить качественное обучение.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>📍 Где проходят тренировки?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Тренировки проходят в современных залах UTM: Зал №1 в Ботанике (CS UTM, sect. BOTANICA, str. DACIA 41/1) и Зал №2 в Рышканах (скоро откроется).</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏆 Можно ли участвовать в турнирах?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Да! Мы регулярно организуем внутренние турниры для наших учеников и участвуем в городских соревнованиях. Турниры помогают проверить навыки и получить опыт игры.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>⏰ Можно ли изменить время тренировки?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Да, мы стараемся подстроиться под ваше расписание. При наличии свободных мест в других группах можно перейти на удобное время. Свяжитесь с тренером для уточнения.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏥 Нужна ли справка от врача?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Для занятий бадминтоном справка от врача не требуется. Однако рекомендуем проконсультироваться с врачом, если у вас есть хронические заболевания или травмы.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-cta">
+          <div class="faq-cta-content">
+            <h3>Не нашли ответ на свой вопрос?</h3>
+            <p>Свяжитесь с нашим тренером, и мы с радостью ответим на все ваши вопросы!</p>
+            <div class="faq-contact-buttons">
+              <a href="https://t.me/qweqweqweeqwe" class="faq-contact-btn telegram" target="_blank">
+                💬 Написать в Telegram
+              </a>
+              <a href="tel:+37368851307" class="faq-contact-btn phone">
+                📞 Позвонить
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Подвал сайта -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <!-- Логотип и основная информация -->
+        <div class="footer-brand">
+          <div class="footer-logo-section">
+            <img src="css/img/ChatGPT Image 10 сент. 2025 г., 23_26_04.png" alt="DTM Logo" class="footer-logo">
+            <div class="footer-brand-text">
+              <h3>DTM Badminton Club</h3>
+              <p>Официальный клуб при UTM</p>
+            </div>
+          </div>
+          <p class="footer-description">
+            Профессиональные тренировки по бадминтону в современных залах Технического университета Молдовы. 
+            Развитие спорта и здорового образа жизни для студентов и всех желающих.
+          </p>
+        </div>
+
+        <!-- Информация о залах -->
+        <div class="footer-halls">
+          <h4>Наши залы при UTM</h4>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №1 - Ботаника</h5>
+              <p>CS UTM, sect. BOTANICA<br>str. DACIA 41/1</p>
+              <span class="hall-status active">Доступен</span>
+            </div>
+          </div>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №2 - Рышканы</h5>
+              <p>CS UTM, RÎSCANI<br>str. Studenților 3/8</p>
+              <span class="hall-status coming-soon">Скоро откроется</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Контакты и социальные сети -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <a href="tel:+37368851307" class="contact-link">+373 68 851 307</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <a href="mailto:evgenijurin998@gmail.com" class="contact-link">evgenijurin998@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <a href="https://t.me/qweqweqweeqwe" class="contact-link" target="_blank">Telegram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📷</div>
+            <a href="https://www.instagram.com/jenyaa_u/" class="contact-link" target="_blank">Instagram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💜</div>
+            <a href="viber://chat?number=+37368851307" class="contact-link" target="_blank">Viber</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <span class="contact-text">Пн-Ср: 18:30-21:00<br>Сб-Вс: 10:00-12:00</span>
+          </div>
+        </div>
+
+        <!-- Быстрые ссылки -->
+        <div class="footer-links">
+          <h4>Быстрые ссылки</h4>
+          <ul class="footer-nav">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#trainer">Тренер</a></li>
+            <li><a href="#halls">Залы</a></li>
+            <li><a href="#schedule">Расписание</a></li>
+            <li><a href="#booking">Запись</a></li>
+            <li><a href="#tournaments">Турниры</a></li>
+            <li><a href="#rating">Рейтинг</a></li>
+            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#history">История</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Нижняя часть футера -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <p>© 2025 DTM Badminton Club. Все права защищены.</p>
+        </div>
+        <div class="footer-bottom-center">
+          <p>Технический университет Молдовы</p>
+        </div>
+        <div class="footer-bottom-right">
+          <p>Сделано с ❤️ для любителей бадминтона</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно для просмотра фото -->
+  <div class="photo-modal" id="photoModal">
+    <button class="photo-modal-close" id="closePhotoModal">&times;</button>
+    <img src="" alt="Увеличенное фото" id="modalPhoto">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
