@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
         heroVideo.style.outline = 'none';
         heroVideo.style.border = 'none';
         heroVideo.style.display = 'block';
+        heroVideo.style.zIndex = '1';
+        heroVideo.style.position = 'absolute';
+        heroVideo.style.top = '0';
+        heroVideo.style.left = '0';
+        heroVideo.style.width = '100%';
+        heroVideo.style.height = '100%';
+        heroVideo.style.objectFit = 'cover';
         
         // Для Яндекс браузера устанавливаем дополнительные атрибуты
         if (isYandexBrowser) {
@@ -88,6 +95,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         heroVideo.addEventListener('loadeddata', function() {
             console.log('Видео загружено успешно');
+            
+            // Принудительно устанавливаем стили для overlay
+            const heroOverlay = document.querySelector('.hero-overlay');
+            if (heroOverlay) {
+                heroOverlay.style.zIndex = '0';
+                heroOverlay.style.position = 'absolute';
+                heroOverlay.style.top = '0';
+                heroOverlay.style.left = '0';
+                heroOverlay.style.width = '100%';
+                heroOverlay.style.height = '100%';
+            }
+            
             // Дополнительная попытка воспроизведения для Яндекс Браузера
             if (heroVideo.paused) {
                 setTimeout(() => {
@@ -688,6 +707,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'hall1-option': 'Зал №1 (Доступен)',
                 'hall2-option': 'Зал №2 (Скоро откроется)',
                 'message-placeholder': 'Расскажите о ваших целях, опыте или особых пожеланиях...',
+                'phone-placeholder': '+373 XX XXX XXX',
+                'email-placeholder': 'example@email.com',
                 
                 // Контакты
                 'contact-title': 'Контакты',
@@ -783,6 +804,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 'faq-cta-telegram': '💬 Написать в Telegram',
                 'faq-cta-phone': '📞 Позвонить',
                 
+                // Турниры
+                'tournaments-title': 'Предстоящие турниры',
+                'tournament-card-title': '🏆 Турнир по бадминтону',
+                'tournament-card-text': 'Надо готовиться и участвоваться в турнире',
+                
+                // Галерея
+                'gallery-title': 'Галерея',
+                'gallery-placeholder-title': 'Фотографии с тренировок',
+                'gallery-placeholder-text': 'Скоро здесь появятся фото с наших тренировок и турниров',
+                
+                // Alt атрибуты изображений
+                'trainer-img-alt': 'Sturza Anzor - тренер по бадминтону',
+                'hall1-img-alt': 'Зал №1 - Спортивный комплекс UTM',
+                'hall2-img-alt': 'Зал №2 - Новый комплекс',
+                'tournament-img-alt': 'Афиша турнира',
+                
                 // Переключатель темы
                 'theme-toggle-light': 'Переключить на темную тему',
                 'theme-toggle-dark': 'Переключить на светлую тему'
@@ -795,6 +832,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'nav-schedule': 'Program',
                 'nav-booking': 'Înregistrare',
                 'nav-tournaments': 'Turnee',
+                'nav-rating': 'Clasament',
+                'nav-gallery': 'Galerie',
+                'nav-history': 'Istorie',
                 'nav-contact': 'Contacte',
                 'nav-faq': 'Întrebări frecvente',
                 
@@ -818,22 +858,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Тренер
                 'trainer-title': 'Antrenorul nostru',
-                'trainer-name': 'Alexandru Petrov',
-                'trainer-text1': 'Maestru în sport la badminton cu 15 ani de experiență în antrenament. Campion al republicii, participant la turnee internaționale. Se specializează în lucrul cu jucători de toate nivelurile — de la începători la profesioniști.',
-                'trainer-text2': 'Alexandru folosește metode moderne de învățare, abordare individuală pentru fiecare elev și creează o atmosferă motivațională pentru atingerea celor mai bune rezultate.',
-                'stat1-label': 'Ani experiență',
-                'stat2-label': 'Elevi',
-                'stat3-label': 'Victorii',
+                'trainer-name': 'Sturza Anzor',
+                'trainer-text1': 'Sturza Anzor — jucător activ la nivel profesional, care împărtășește experiența și dragostea pentru badminton. El înțelege foarte bine de unde să înceapă și cum să progreseze rapid, pentru că a parcurs el însuși acest drum.',
+                'trainer-text2': 'Anzor creează o atmosferă prietenoasă la antrenamente, ajută fiecare participant să stăpânească tehnica și să se simtă încrezător pe teren. Scopul său este ca badmintonul să aducă bucurie, energie și cunoștințe noi.',
+                'stat1-label': 'Abordare individuală',
+                'stat2-label': 'Tehnici moderne și practică',
+                'stat3-label': 'Atmosferă prietenoasă',
+                'stat4-label': 'Antrenamente pentru toate nivelurile',
                 
                 // Залы
                 'halls-title': 'Sălile noastre',
                 'hall1-title': 'Sala №1',
                 'hall1-status': 'Disponibilă',
-                'hall1-text': 'Sală modernă cu acoperire profesională, iluminat de calitate și toate echipamentele necesare. Dimensiuni: 13.4 x 6.1 m. Înălțimea tavanului: 9 m. Aer condiționat.',
+                'hall1-text': 'Complex sportiv modern cu două terenuri profesionale pentru badminton. Acoperire de calitate, iluminat excelent și condiții confortabile pentru antrenamente.',
                 'hall1-location': 'Vezi pe hartă',
                 'hall2-title': 'Sala №2',
                 'hall2-status': 'În curând',
-                'hall2-text': 'Sală nouă modernă cu acoperire îmbunătățită și posibilități extinse. Dimensiuni planificate: 15 x 7 m. Înălțimea tavanului: 10 m. Sistem de ventilație și încălzire.',
+                'hall2-text': 'Sală modernă cu reparații noi și acoperire. 4 terenuri profesionale pentru badminton. Dimensiuni mărite, iluminat îmbunătățit și condiții confortabile pentru antrenamente.',
                 'hall2-location': 'Vezi pe hartă',
                 
                 // Расписание
@@ -869,6 +910,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'hall1-option': 'Sala №1 (Disponibilă)',
                 'hall2-option': 'Sala №2 (În curând)',
                 'message-placeholder': 'Spuneți-ne despre obiectivele, experiența sau dorințele speciale...',
+                'phone-placeholder': '+373 XX XXX XXX',
+                'email-placeholder': 'example@email.com',
                 
                 // Контакты
                 'contact-title': 'Contacte',
@@ -894,11 +937,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 'rating-winrate': '% victorii',
                 'rating-trend': 'Tendință',
                 'rating-rules-title': 'Regulile clasamentului',
-                'rating-rule-1': 'Pentru victoria în turneu: +50 puncte',
-                'rating-rule-2': 'Pentru locul 2: +30 puncte',
-                'rating-rule-3': 'Pentru locul 3: +20 puncte',
-                'rating-rule-4': 'Pentru participarea la turneu: +10 puncte',
-                'rating-rule-5': 'Pentru antrenamentele regulate: +5 puncte pe săptămână',
+                'rating-rule-1': '🏆 Categoria Open (maeștri): locul 1 +100, locul 2 +70, locul 3 +50, participare +20',
+                'rating-rule-2': '🥇 Categoria A: locul 1 +50, locul 2 +40, locul 3 +30',
+                'rating-rule-3': '🥈 Categoria B: locul 1 +40, locul 2 +30, locul 3 +20',
+                'rating-rule-4': '🏸 Categoria C (începători): locul 1 +30, locul 2 +20, locul 3 +10',
+                'rating-rule-5': '',
                 'rating-last-update': 'Ultima actualizare:',
                 'rating-next-update': 'Următoarea actualizare:',
                 
@@ -964,6 +1007,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 'faq-cta-telegram': '💬 Scrie în Telegram',
                 'faq-cta-phone': '📞 Sună',
                 
+                // Турниры
+                'tournaments-title': 'Turnee viitoare',
+                'tournament-card-title': '🏆 Turneu de badminton',
+                'tournament-card-text': 'Trebuie să ne pregătim și să participăm la turneu',
+                
+                // Галерея
+                'gallery-title': 'Galerie',
+                'gallery-placeholder-title': 'Fotografii de la antrenamente',
+                'gallery-placeholder-text': 'În curând vor apărea aici fotografii de la antrenamentele și turneele noastre',
+                
+                // Alt атрибуты изображений
+                'trainer-img-alt': 'Sturza Anzor - antrenor de badminton',
+                'hall1-img-alt': 'Sala №1 - Complexul sportiv UTM',
+                'hall2-img-alt': 'Sala №2 - Complex nou',
+                'tournament-img-alt': 'Poster turneu',
+                
                 // Переключатель темы
                 'theme-toggle-light': 'Comută la tema întunecată',
                 'theme-toggle-dark': 'Comută la tema luminoasă'
@@ -976,6 +1035,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'nav-schedule': 'Schedule',
                 'nav-booking': 'Booking',
                 'nav-tournaments': 'Tournaments',
+                'nav-rating': 'Rankings',
+                'nav-gallery': 'Gallery',
+                'nav-history': 'History',
                 'nav-contact': 'Contacts',
                 'nav-faq': 'FAQ',
                 
@@ -999,22 +1061,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Тренер
                 'trainer-title': 'Our trainer',
-                'trainer-name': 'Alexander Petrov',
-                'trainer-text1': 'Master of Sports in badminton with 15 years of coaching experience. Republic champion, participant in international tournaments. Specializes in working with players of all levels — from beginners to professionals.',
-                'trainer-text2': 'Alexander uses modern teaching methods, individual approach to each student and creates a motivating atmosphere for achieving the best results.',
-                'stat1-label': 'Years experience',
-                'stat2-label': 'Students',
-                'stat3-label': 'Wins',
+                'trainer-name': 'Sturza Anzor',
+                'trainer-text1': 'Sturza Anzor — an active professional-level player who shares his experience and love for badminton. He understands very well where to start and how to progress quickly, as he has walked this path himself.',
+                'trainer-text2': 'Anzor creates a friendly atmosphere during training, helps each participant master the technique and feel confident on the court. His goal is for badminton to bring joy, energy and new acquaintances.',
+                'stat1-label': 'Individual approach',
+                'stat2-label': 'Modern techniques and practice',
+                'stat3-label': 'Friendly atmosphere',
+                'stat4-label': 'Training for all levels',
                 
                 // Залы
                 'halls-title': 'Our halls',
                 'hall1-title': 'Hall №1',
                 'hall1-status': 'Available',
-                'hall1-text': 'Modern hall with professional flooring, quality lighting and all necessary equipment. Dimensions: 13.4 x 6.1 m. Ceiling height: 9 m. Air conditioning.',
+                'hall1-text': 'Modern sports complex with two professional badminton courts. Quality flooring, excellent lighting and comfortable conditions for training.',
                 'hall1-location': 'View on map',
                 'hall2-title': 'Hall №2',
                 'hall2-status': 'Coming soon',
-                'hall2-text': 'New modern hall with improved flooring and expanded capabilities. Planned dimensions: 15 x 7 m. Ceiling height: 10 m. Ventilation and heating system.',
+                'hall2-text': 'Modern hall with new renovation and flooring. 4 professional badminton courts. Increased dimensions, improved lighting and comfortable conditions for training.',
                 'hall2-location': 'View on map',
                 
                 // Расписание
@@ -1050,6 +1113,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'hall1-option': 'Hall №1 (Available)',
                 'hall2-option': 'Hall №2 (Coming soon)',
                 'message-placeholder': 'Tell us about your goals, experience or special wishes...',
+                'phone-placeholder': '+373 XX XXX XXX',
+                'email-placeholder': 'example@email.com',
                 
                 // Контакты
                 'contact-title': 'Contacts',
@@ -1144,6 +1209,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 'faq-cta-text': 'Contact our coach, and we will be happy to answer all your questions!',
                 'faq-cta-telegram': '💬 Write in Telegram',
                 'faq-cta-phone': '📞 Call',
+                
+                // Турниры
+                'tournaments-title': 'Upcoming Tournaments',
+                'tournament-card-title': '🏆 Badminton Tournament',
+                'tournament-card-text': 'We need to prepare and participate in the tournament',
+                
+                // Галерея
+                'gallery-title': 'Gallery',
+                'gallery-placeholder-title': 'Training Photos',
+                'gallery-placeholder-text': 'Photos from our training sessions and tournaments will appear here soon',
+                
+                // Alt атрибуты изображений
+                'trainer-img-alt': 'Sturza Anzor - badminton trainer',
+                'hall1-img-alt': 'Hall №1 - UTM Sports Complex',
+                'hall2-img-alt': 'Hall №2 - New Complex',
+                'tournament-img-alt': 'Tournament poster',
                 
                 // Переключатель темы
                 'theme-toggle-light': 'Switch to dark theme',
@@ -1292,6 +1373,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         document.querySelector('#message').placeholder = currentTranslations['message-placeholder'];
+        document.querySelector('#phone').placeholder = currentTranslations['phone-placeholder'];
+        document.querySelector('#email').placeholder = currentTranslations['email-placeholder'];
         document.querySelector('#bookingForm button[type="submit"]').textContent = currentTranslations['form-submit'];
         
         // Обновляем рейтинг
@@ -1475,6 +1558,22 @@ document.addEventListener('DOMContentLoaded', function() {
         if (footerBottomTexts[1]) footerBottomTexts[1].textContent = currentTranslations['footer-university'];
         if (footerBottomTexts[2]) footerBottomTexts[2].textContent = currentTranslations['footer-made-with'];
         
+        // Обновляем навигацию в футере
+        const footerNavLinks = document.querySelectorAll('.footer-nav a');
+        footerNavLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '#about') link.textContent = currentTranslations['nav-about'];
+            if (href === '#trainer') link.textContent = currentTranslations['nav-trainer'];
+            if (href === '#halls') link.textContent = currentTranslations['nav-halls'];
+            if (href === '#schedule') link.textContent = currentTranslations['nav-schedule'];
+            if (href === '#booking') link.textContent = currentTranslations['nav-booking'];
+            if (href === '#tournaments') link.textContent = currentTranslations['nav-tournaments'];
+            if (href === '#rating') link.textContent = currentTranslations['nav-rating'];
+            if (href === '#gallery') link.textContent = currentTranslations['nav-gallery'];
+            if (href === '#history') link.textContent = currentTranslations['nav-history'];
+            if (href === '#contact') link.textContent = currentTranslations['nav-contact'];
+        });
+        
         // Обновляем FAQ секцию
         const faqSection = document.querySelector('#faq');
         if (faqSection) {
@@ -1521,6 +1620,49 @@ document.addEventListener('DOMContentLoaded', function() {
             const faqCtaPhone = faqSection.querySelector('.faq-contact-btn.phone');
             if (faqCtaPhone) faqCtaPhone.textContent = currentTranslations['faq-cta-phone'];
         }
+        
+        // Обновляем турниры
+        const tournamentsSection = document.querySelector('#tournaments');
+        if (tournamentsSection) {
+            const tournamentsTitle = tournamentsSection.querySelector('.section-title');
+            if (tournamentsTitle) tournamentsTitle.textContent = currentTranslations['tournaments-title'];
+            
+            const tournamentCard = tournamentsSection.querySelector('.tournament-card');
+            if (tournamentCard) {
+                const tournamentCardTitle = tournamentCard.querySelector('h3');
+                const tournamentCardText = tournamentCard.querySelector('p');
+                if (tournamentCardTitle) tournamentCardTitle.textContent = currentTranslations['tournament-card-title'];
+                if (tournamentCardText) tournamentCardText.textContent = currentTranslations['tournament-card-text'];
+            }
+        }
+        
+        // Обновляем галерею
+        const gallerySection = document.querySelector('#gallery');
+        if (gallerySection) {
+            const galleryTitle = gallerySection.querySelector('.section-title');
+            if (galleryTitle) galleryTitle.textContent = currentTranslations['gallery-title'];
+            
+            const galleryPlaceholder = gallerySection.querySelector('.gallery-placeholder');
+            if (galleryPlaceholder) {
+                const placeholderTitle = galleryPlaceholder.querySelector('h3');
+                const placeholderText = galleryPlaceholder.querySelector('p');
+                if (placeholderTitle) placeholderTitle.textContent = currentTranslations['gallery-placeholder-title'];
+                if (placeholderText) placeholderText.textContent = currentTranslations['gallery-placeholder-text'];
+            }
+        }
+        
+        // Обновляем alt атрибуты изображений
+        const trainerImg = document.querySelector('.trainer-img');
+        if (trainerImg) trainerImg.alt = currentTranslations['trainer-img-alt'];
+        
+        const hall1Img = document.querySelector('.hall-img');
+        if (hall1Img) hall1Img.alt = currentTranslations['hall1-img-alt'];
+        
+        const hall2Img = document.querySelectorAll('.hall-img')[1];
+        if (hall2Img) hall2Img.alt = currentTranslations['hall2-img-alt'];
+        
+        const tournamentImg = document.querySelector('.tournament-image');
+        if (tournamentImg) tournamentImg.alt = currentTranslations['tournament-img-alt'];
         
         // Обновляем атрибут lang у html
         document.documentElement.lang = lang;
@@ -1699,16 +1841,19 @@ function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     
-    // Обновляем иконку переключателя
+    // Обновляем состояние переключателя темы
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
     
-    if (theme === 'dark') {
-        themeIcon.textContent = '☀️';
-        themeToggle.title = getCurrentTranslation('theme-toggle-dark');
-    } else {
-        themeIcon.textContent = '🌙';
-        themeToggle.title = getCurrentTranslation('theme-toggle-light');
+    if (themeToggle) {
+        // Устанавливаем состояние checkbox
+        themeToggle.checked = (theme === 'dark');
+        
+        // Обновляем title
+        if (theme === 'dark') {
+            themeToggle.title = getCurrentTranslation('theme-toggle-dark');
+        } else {
+            themeToggle.title = getCurrentTranslation('theme-toggle-light');
+        }
     }
     
     console.log(`Тема изменена на: ${theme}`);
@@ -1740,9 +1885,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('themeToggle');
     
     if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        themeToggle.addEventListener('change', function() {
+            const newTheme = this.checked ? 'dark' : 'light';
             setTheme(newTheme);
         });
     }
