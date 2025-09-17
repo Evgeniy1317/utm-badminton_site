@@ -278,8 +278,8 @@ body {
     }
   }
   
-  /* Шапка сайта */
-  .header {
+/* Шапка сайта */
+.header {
   background: 
     radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.4) 0%, transparent 50%),
@@ -297,8 +297,38 @@ body {
     0 4px 20px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   min-height: 80px;
-  position: fixed;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Адаптивная шапка при скролле */
+.header.scrolled {
+  padding: 0.5rem 0;
+  min-height: 45px;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 2px 15px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Шапка при скролле вниз (еще меньше) */
+.header.scrolled-down {
+  padding: 0.3rem 0;
+  min-height: 35px;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 1px 10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Шапка при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up {
+  padding: 1rem 0;
+  min-height: 70px;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .header::before {
@@ -390,6 +420,27 @@ body {
   border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Уменьшение логотипа при скролле */
+.header.scrolled .utm-logo-img {
+  height: 60px;
+  width: 60px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Логотип при скролле вниз (еще меньше) */
+.header.scrolled-down .utm-logo-img {
+  height: 40px;
+  width: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Логотип при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up .utm-logo-img {
+  height: 80px;
+  width: 80px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
 .utm-logo-img:hover {
   transform: scale(1.05);
 }
@@ -408,6 +459,25 @@ body {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-family: 'Inter', 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Уменьшение текста логотипа при скролле */
+.header.scrolled .logo-text {
+  font-size: 1.4rem;
+  letter-spacing: 0.3px;
+}
+
+/* Текст логотипа при скролле вниз (еще меньше) */
+.header.scrolled-down .logo-text {
+  font-size: 1.1rem;
+  letter-spacing: 0.2px;
+}
+
+/* Текст логотипа при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up .logo-text {
+  font-size: 1.6rem;
+  letter-spacing: 0.4px;
 }
 
 .logo-text::before {
@@ -441,6 +511,25 @@ body {
   z-index: 10;
   flex: 1;
   justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Уменьшение навигации при скролле */
+.header.scrolled .nav {
+  padding: 0.3rem;
+  border-radius: 0.8rem;
+}
+
+/* Навигация при скролле вниз (еще меньше) */
+.header.scrolled-down .nav {
+  padding: 0.2rem;
+  border-radius: 0.6rem;
+}
+
+/* Навигация при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up .nav {
+  padding: 0.6rem;
+  border-radius: 1rem;
 }
   
   .nav a {
@@ -457,6 +546,30 @@ body {
   background: transparent;
   overflow: visible !important;
   z-index: 1;
+}
+
+/* Уменьшение ссылок навигации при скролле */
+.header.scrolled .nav a {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.6rem;
+  margin: 0 0.1rem;
+}
+
+/* Ссылки навигации при скролле вниз (еще меньше) */
+.header.scrolled-down .nav a {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  margin: 0 0.05rem;
+}
+
+/* Ссылки навигации при скролле вверх (увеличиваются до среднего размера) */
+.header.scrolled-up .nav a {
+  font-size: 0.95rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  margin: 0 0.2rem;
 }
 
 /* Разделители между пунктами меню */
@@ -813,6 +926,27 @@ body.mobile-menu-open {
   font-weight: 600;
 }
 
+/* Уменьшение переключателя языка при скролле */
+.header.scrolled .lang-trigger {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 0.6rem;
+}
+
+/* Переключатель языка при скролле вниз (еще меньше) */
+.header.scrolled-down .lang-trigger {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+/* Переключатель языка при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up .lang-trigger {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 0.75rem;
+}
+
 .lang-trigger:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: var(--accent-color);
@@ -944,6 +1078,22 @@ body.mobile-menu-open {
   --back-clouds-color: #AACADF;
   --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
   --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+  transition: all 0.3s ease;
+}
+
+/* Уменьшение переключателя темы при скролле */
+.header.scrolled .theme-switch {
+  --toggle-size: 14px;
+}
+
+/* Переключатель темы при скролле вниз (еще меньше) */
+.header.scrolled-down .theme-switch {
+  --toggle-size: 12px;
+}
+
+/* Переключатель темы при скролле вверх (увеличивается до среднего размера) */
+.header.scrolled-up .theme-switch {
+  --toggle-size: 16px;
 }
 
 .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
@@ -4175,13 +4325,64 @@ section:not(.hero) {
     position: relative;
   }
   
+  /* Адаптивная шапка для мобильных при скролле */
+  .header.scrolled {
+    padding: 0.6rem 0;
+    min-height: 50px;
+  }
+  
+  /* Шапка при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down {
+    padding: 0.4rem 0;
+    min-height: 40px;
+  }
+  
+  /* Шапка при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up {
+    padding: 0.8rem 0;
+    min-height: 65px;
+  }
+  
   .logo-text {
     font-size: 1.5rem;
+  }
+  
+  /* Уменьшение текста логотипа на мобильных при скролле */
+  .header.scrolled .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  /* Текст логотипа при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .logo-text {
+    font-size: 1rem;
+  }
+  
+  /* Текст логотипа при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .logo-text {
+    font-size: 1.4rem;
   }
   
   .utm-logo-img {
     height: 80px;
     width: 80px;
+  }
+  
+  /* Уменьшение логотипа на мобильных при скролле */
+  .header.scrolled .utm-logo-img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  /* Логотип при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .utm-logo-img {
+    height: 35px;
+    width: 35px;
+  }
+  
+  /* Логотип при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .utm-logo-img {
+    height: 70px;
+    width: 70px;
   }
   
   .lang-trigger {
@@ -4678,9 +4879,45 @@ section:not(.hero) {
     letter-spacing: 0.2px;
   }
   
+  /* Уменьшение текста логотипа на очень маленьких экранах при скролле */
+  .header.scrolled .logo-text {
+    font-size: 1.1rem;
+    letter-spacing: 0.1px;
+  }
+  
+  /* Текст логотипа при скролле вниз на очень маленьких экранах (еще меньше) */
+  .header.scrolled-down .logo-text {
+    font-size: 0.9rem;
+    letter-spacing: 0.05px;
+  }
+  
+  /* Текст логотипа при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
+  .header.scrolled-up .logo-text {
+    font-size: 1.3rem;
+    letter-spacing: 0.2px;
+  }
+  
   .utm-logo-img {
     height: 70px;
     width: 70px;
+  }
+  
+  /* Уменьшение логотипа на очень маленьких экранах при скролле */
+  .header.scrolled .utm-logo-img {
+    height: 45px;
+    width: 45px;
+  }
+  
+  /* Логотип при скролле вниз на очень маленьких экранах (еще меньше) */
+  .header.scrolled-down .utm-logo-img {
+    height: 30px;
+    width: 30px;
+  }
+  
+  /* Логотип при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
+  .header.scrolled-up .utm-logo-img {
+    height: 60px;
+    width: 60px;
   }
   
   .schedule-grid {

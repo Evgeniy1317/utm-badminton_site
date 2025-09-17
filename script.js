@@ -1891,6 +1891,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Обработчик скролла для адаптивной шапки
+    const header = document.querySelector('.header');
+    let lastScrollTop = 0;
+    let ticking = false;
+    let scrollDirection = 'down';
+
+    function updateHeader() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
+        
+        // Определяем направление скролла
+        if (Math.abs(scrollDelta) > 5) { // Минимальный порог для избежания дрожания
+            scrollDirection = scrollDelta > 0 ? 'down' : 'up';
+        }
+        
+        // Удаляем все классы скролла
+        header.classList.remove('scrolled', 'scrolled-down', 'scrolled-up');
+        
+        if (scrollTop <= 50) {
+            // При возвращении на самый верх - меню большое (обычное состояние)
+            // Никаких дополнительных классов не добавляем
+        } else if (scrollTop > 200) {
+            // При скролле вниз - делаем шапку очень маленькой
+            if (scrollDirection === 'down') {
+                header.classList.add('scrolled-down');
+            }
+            // При скролле вверх - делаем шапку увеличенной до среднего размера
+            else if (scrollDirection === 'up') {
+                header.classList.add('scrolled-up');
+            }
+        } else if (scrollTop > 100) {
+            // Средний размер при скролле
+            header.classList.add('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+        ticking = false;
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateHeader);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+
     // Функциональность для просмотра фото в модальном окне
     const courtPhoto = document.querySelector('.badminton-court-photo');
     const photoModal = document.getElementById('photoModal');
