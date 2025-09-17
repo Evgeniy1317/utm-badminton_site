@@ -1263,15 +1263,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#booking .section-title').textContent = currentTranslations['booking-title'];
         document.querySelector('#successMessage').textContent = currentTranslations['success-message'];
         
-        // Обновляем поля формы
-        const formLabels = document.querySelectorAll('#bookingForm label');
-        formLabels[0].textContent = currentTranslations['form-name'];
-        formLabels[1].textContent = currentTranslations['form-phone'];
-        formLabels[2].textContent = currentTranslations['form-email'];
-        formLabels[3].textContent = currentTranslations['form-level'];
-        formLabels[4].textContent = currentTranslations['form-hall'];
-        formLabels[5].textContent = currentTranslations['form-day'];
-        formLabels[6].textContent = currentTranslations['form-message'];
+        // Обновляем поля формы (пропускаем скрытое поле для ботов)
+        const formLabels = document.querySelectorAll('#bookingForm .form-group label');
+        if (formLabels.length >= 7) {
+            formLabels[0].textContent = currentTranslations['form-name'];
+            formLabels[1].textContent = currentTranslations['form-phone'];
+            formLabels[2].textContent = currentTranslations['form-email'];
+            formLabels[3].textContent = currentTranslations['form-level'];
+            formLabels[4].textContent = currentTranslations['form-hall'];
+            formLabels[5].textContent = currentTranslations['form-day'];
+            formLabels[6].textContent = currentTranslations['form-message'];
+        }
         
         // Обновляем опции формы
         const levelOptions = document.querySelectorAll('#level option');
