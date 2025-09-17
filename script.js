@@ -1263,8 +1263,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#booking .section-title').textContent = currentTranslations['booking-title'];
         document.querySelector('#successMessage').textContent = currentTranslations['success-message'];
         
-        // Обновляем поля формы
-        const formLabels = document.querySelectorAll('#bookingForm label');
+        // Обновляем поля формы (пропускаем скрытое поле для ботов)
+        const formLabels = document.querySelectorAll('#bookingForm .form-group label');
         formLabels[0].textContent = currentTranslations['form-name'];
         formLabels[1].textContent = currentTranslations['form-phone'];
         formLabels[2].textContent = currentTranslations['form-email'];
