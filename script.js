@@ -1,6 +1,183 @@
 // UTM Badminton Club - JavaScript функциональность
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Определяем мобильное устройство для изоляции стилей
+    function detectMobileDevice() {
+        const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.body.classList.add('mobile-device');
+        } else {
+            document.body.classList.remove('mobile-device');
+        }
+    }
+    
+    // Определяем устройство при загрузке
+    detectMobileDevice();
+    
+    // Определяем устройство при изменении размера окна
+    window.addEventListener('resize', detectMobileDevice);
+    
+    // Скрытие/показ шапки при скролле (только на мобильных)
+    let lastScrollTop = 0;
+    let isScrolling = false;
+    
+    function handleHeaderScroll() {
+        if (window.innerWidth > 768) return; // Только для мобильных
+        
+        const header = document.querySelector('.header');
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+            // Скролл вниз - скрываем шапку
+            header.classList.add('hidden');
+        } else {
+            // Скролл вверх - показываем шапку
+            header.classList.remove('hidden');
+        }
+        
+        lastScrollTop = currentScrollTop;
+    }
+    
+    // Оптимизированный обработчик скролла
+    function throttledScroll() {
+        if (!isScrolling) {
+            requestAnimationFrame(() => {
+                handleHeaderScroll();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }
+    
+    window.addEventListener('scroll', throttledScroll);
+    
+// Переключатели темы (десктопный и мобильный)
+const themeToggle = document.getElementById('themeToggle');
+const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+let isDarkTheme = localStorage.getItem('theme') === 'dark';
+
+// Обработчик десктопного переключателя
+if (themeToggle) {
+    themeToggle.addEventListener('change', function() {
+        isDarkTheme = this.checked;
+        const newTheme = isDarkTheme ? 'dark' : 'light';
+        
+        // Сохраняем в localStorage
+        localStorage.setItem('theme', newTheme);
+        
+        // Применяем тему
+        setTheme(newTheme);
+        
+        // Синхронизируем мобильный переключатель
+        if (mobileThemeToggle) {
+            mobileThemeToggle.checked = this.checked;
+        }
+    });
+}
+
+// Обработчик мобильного переключателя с оптимизацией
+if (mobileThemeToggle) {
+    let isProcessing = false;
+    
+    mobileThemeToggle.addEventListener('change', function() {
+        // Предотвращаем множественные клики
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        // Используем requestAnimationFrame для плавности
+        requestAnimationFrame(() => {
+            isDarkTheme = this.checked;
+            const newTheme = isDarkTheme ? 'dark' : 'light';
+            
+            // Сохраняем в localStorage
+            localStorage.setItem('theme', newTheme);
+            
+            // Применяем тему
+            setTheme(newTheme);
+            
+            // Синхронизируем десктопный переключатель
+            if (themeToggle) {
+                themeToggle.checked = this.checked;
+            }
+            
+            // Разрешаем следующий клик через небольшую задержку
+            setTimeout(() => {
+                isProcessing = false;
+            }, 100);
+        });
+    });
+}
+
+// Синхронизация при загрузке
+if (themeToggle && mobileThemeToggle) {
+    mobileThemeToggle.checked = themeToggle.checked;
+}
+
+// Мобильное гамбургер-меню
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+// Функция открытия/закрытия меню
+function toggleMobileMenu() {
+    mobileMenu.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+}
+
+// Функция закрытия меню
+function closeMobileMenu() {
+    mobileMenu.classList.remove('active');
+    mobileMenuToggle.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Обработчики событий
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+}
+
+if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+}
+
+// Закрытие меню при клике на ссылку
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetSection = this.getAttribute('data-section');
+        const targetElement = document.getElementById(targetSection);
+        
+        if (targetElement) {
+            // Плавная прокрутка к секции
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // Закрываем меню
+        closeMobileMenu();
+    });
+});
+
+// Закрытие меню при клике вне его
+document.addEventListener('click', function(e) {
+    if (mobileMenu.classList.contains('active') && 
+        !mobileMenu.contains(e.target) && 
+        !mobileMenuToggle.contains(e.target)) {
+        closeMobileMenu();
+    }
+});
+
+// Закрытие меню при нажатии Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
     
     // Проверка загрузки видео и автовоспроизведения
     const heroVideo = document.querySelector('.hero-video');
@@ -584,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Сохраняем выбранный язык
             localStorage.setItem('selectedLanguage', selectedLang);
             
-            // Обновляем отображение
+            // Обновляем отображение (это скроет выбранный язык)
             setActiveLanguage(selectedLang);
             
             // Переключаем язык
@@ -616,6 +793,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentFlag = document.querySelector('.current-flag');
         currentFlag.src = flagImages[lang];
         currentFlag.alt = lang.toUpperCase();
+        
+        // Скрываем активный язык из выпадающего меню
+        langOptions.forEach(option => {
+            if (option.dataset.lang === lang) {
+                option.style.display = 'none';
+            } else {
+                option.style.display = 'flex';
+            }
+        });
     }
     
     // Функция переключения языка
@@ -1684,65 +1870,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Инициализируем язык при загрузке
     switchLanguage(currentLang);
 
-    // Мобильное меню
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    // Мобильное меню будет добавлено позже
 
-    function toggleMobileMenu() {
-        const isActive = mobileMenu.classList.contains('active');
-        
-        if (isActive) {
-            closeMobileMenu();
-        } else {
-            openMobileMenu();
-        }
-    }
-
-    function openMobileMenu() {
-        mobileMenuToggle.classList.add('active');
-        mobileMenu.classList.add('active');
-        mobileMenuOverlay.classList.add('active');
-        document.body.classList.add('mobile-menu-open');
-    }
-
-    function closeMobileMenu() {
-        mobileMenuToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        mobileMenuOverlay.classList.remove('active');
-        document.body.classList.remove('mobile-menu-open');
-    }
-
-    // Обработчики событий для мобильного меню
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-    }
-
-    if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-    }
-
-    // Закрытие меню при клике на ссылку
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            closeMobileMenu();
-        });
-    });
-
-    // Закрытие меню при изменении размера экрана
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            closeMobileMenu();
-        }
-    });
-
-    // Закрытие меню при нажатии Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
+    // Обработчики клавиатуры будут добавлены позже
 
     // Система уведомлений для турниров
     function updateTournamentNotifications() {
@@ -1880,16 +2010,9 @@ function getCurrentTranslation(key) {
     return translations[currentLang]?.[key] || key;
 }
 
-// Обработчик переключения темы
+// Обработчик переключения темы (устаревший - заменен на новый выше)
 document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('themeToggle');
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('change', function() {
-            const newTheme = this.checked ? 'dark' : 'light';
-            setTheme(newTheme);
-        });
-    }
+    // Старый обработчик удален - используется новый универсальный
 
     // Обработчик скролла для адаптивной шапки
     const header = document.querySelector('.header');
