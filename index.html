@@ -7,8 +7,69 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/style.css?v=31">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>">
+  <style>
+    /* СТАТИЧНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+    @media screen and (max-width: 768px) {
+      .utm-logo-img {
+        height: 80px !important;
+        width: 80px !important;
+      }
+      .logo-text {
+        font-size: 2.2rem !important;
+        letter-spacing: 0.3px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Отключаем анимации логотипа на мобильных */
+      .header.scrolled .utm-logo-img,
+      .header.scrolled-down .utm-logo-img,
+      .header.scrolled-up .utm-logo-img {
+        height: 80px !important;
+        width: 80px !important;
+      }
+      
+      .header.scrolled .logo-text,
+      .header.scrolled-down .logo-text,
+      .header.scrolled-up .logo-text {
+        font-size: 2.2rem !important;
+        letter-spacing: 0.3px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      .utm-logo-img {
+        height: 70px !important;
+        width: 70px !important;
+      }
+      .logo-text {
+        font-size: 1.8rem !important;
+        letter-spacing: 0.2px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+      
+      /* Отключаем анимации логотипа на мобильных */
+      .header.scrolled .utm-logo-img,
+      .header.scrolled-down .utm-logo-img,
+      .header.scrolled-up .utm-logo-img {
+        height: 70px !important;
+        width: 70px !important;
+      }
+      
+      .header.scrolled .logo-text,
+      .header.scrolled-down .logo-text,
+      .header.scrolled-up .logo-text {
+        font-size: 1.8rem !important;
+        letter-spacing: 0.2px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -477,7 +538,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🥈</div>
                     <div class="player-details">
-                      <div class="player-name">Александр Петров</div>
+                      <div class="player-name">Игрок #2</div>
                       <div class="player-level">Продвинутый</div>
                     </div>
                   </div>
@@ -494,7 +555,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🥉</div>
                     <div class="player-details">
-                      <div class="player-name">Мария Козлова</div>
+                      <div class="player-name">Игрок #3</div>
                       <div class="player-level">Продвинутый</div>
                     </div>
                   </div>
@@ -511,7 +572,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Дмитрий Иванов</div>
+                      <div class="player-name">Игрок #4</div>
                       <div class="player-level">Средний</div>
                     </div>
                   </div>
@@ -528,7 +589,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Елена Смирнова</div>
+                      <div class="player-name">Игрок #5</div>
                       <div class="player-level">Средний</div>
                     </div>
                   </div>
@@ -545,7 +606,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Андрей Волков</div>
+                      <div class="player-name">Игрок #6</div>
                       <div class="player-level">Средний</div>
                     </div>
                   </div>
@@ -562,7 +623,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Ольга Новикова</div>
+                      <div class="player-name">Игрок #7</div>
                       <div class="player-level">Средний</div>
                     </div>
                   </div>
@@ -579,7 +640,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Сергей Морозов</div>
+                      <div class="player-name">Игрок #8</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -596,7 +657,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Анна Кузнецова</div>
+                      <div class="player-name">Игрок #9</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -613,7 +674,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Игорь Лебедев</div>
+                      <div class="player-name">Игрок #10</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -630,7 +691,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Татьяна Федорова</div>
+                      <div class="player-name">Игрок #11</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -647,7 +708,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Владимир Соколов</div>
+                      <div class="player-name">Игрок #12</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -664,7 +725,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Наталья Попова</div>
+                      <div class="player-name">Игрок #13</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -681,7 +742,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Роман Васильев</div>
+                      <div class="player-name">Игрок #14</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -698,7 +759,7 @@
                   <div class="player-info">
                     <div class="player-avatar">🏸</div>
                     <div class="player-details">
-                      <div class="player-name">Юлия Орлова</div>
+                      <div class="player-name">Игрок #15</div>
                       <div class="player-level">Новичок</div>
                     </div>
                   </div>
@@ -1127,5 +1188,69 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Статичные стили для мобильных устройств
+    function applyMobileStyles() {
+      if (window.innerWidth <= 768) {
+        const logoImg = document.querySelector('.utm-logo-img');
+        const logoText = document.querySelector('.logo-text');
+        
+        if (logoImg) {
+          logoImg.style.height = '80px';
+          logoImg.style.width = '80px';
+        }
+        
+        if (logoText) {
+          logoText.style.fontSize = '2.2rem';
+          logoText.style.letterSpacing = '0.3px';
+          logoText.style.fontWeight = '700';
+          logoText.style.lineHeight = '1.2';
+        }
+      }
+      
+      if (window.innerWidth <= 480) {
+        const logoImg = document.querySelector('.utm-logo-img');
+        const logoText = document.querySelector('.logo-text');
+        
+        if (logoImg) {
+          logoImg.style.height = '70px';
+          logoImg.style.width = '70px';
+        }
+        
+        if (logoText) {
+          logoText.style.fontSize = '1.8rem';
+          logoText.style.letterSpacing = '0.2px';
+          logoText.style.fontWeight = '700';
+          logoText.style.lineHeight = '1.2';
+        }
+      }
+    }
+    
+    // Отключаем анимации логотипа на мобильных при скролле
+    function disableLogoAnimationsOnMobile() {
+      if (window.innerWidth <= 768) {
+        const logoImg = document.querySelector('.utm-logo-img');
+        const logoText = document.querySelector('.logo-text');
+        
+        if (logoImg) {
+          logoImg.style.transition = 'none';
+        }
+        
+        if (logoText) {
+          logoText.style.transition = 'none';
+        }
+      }
+    }
+    
+    // Применить стили при загрузке и изменении размера окна
+    document.addEventListener('DOMContentLoaded', function() {
+      applyMobileStyles();
+      disableLogoAnimationsOnMobile();
+    });
+    window.addEventListener('resize', function() {
+      applyMobileStyles();
+      disableLogoAnimationsOnMobile();
+    });
+  </script>
 </body>
 </html>

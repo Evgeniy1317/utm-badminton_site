@@ -18,6 +18,331 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
+/* КОМПАКТНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media screen and (max-width: 768px) {
+  .utm-logo-img {
+    height: 80px !important;
+    width: 80px !important;
+  }
+  
+  .logo-text {
+    font-size: 2.2rem !important;
+    letter-spacing: 0.3px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Отключаем анимации логотипа на мобильных */
+  .header.scrolled .utm-logo-img,
+  .header.scrolled-down .utm-logo-img,
+  .header.scrolled-up .utm-logo-img {
+    height: 80px !important;
+    width: 80px !important;
+  }
+  
+  .header.scrolled .logo-text,
+  .header.scrolled-down .logo-text,
+  .header.scrolled-up .logo-text {
+    font-size: 2.2rem !important;
+    letter-spacing: 0.3px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* КОМПАКТНЫЕ СЕКЦИИ */
+  section {
+    padding: 2rem 0 !important;
+  }
+  
+  .section-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  /* КОМПАКТНЫЕ КАРТОЧКИ ПРЕИМУЩЕСТВ */
+  .benefit-card {
+    padding: 1rem 0.8rem !important;
+    min-height: auto !important;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .benefit-card p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* КОМПАКТНЫЕ КАРТОЧКИ ЗАЛОВ */
+  .hall-card {
+    padding: 1rem 0.8rem !important;
+    min-height: auto !important;
+  }
+  
+  .hall-card h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .hall-card p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* КОМПАКТНЫЕ КАРТОЧКИ ТУРНИРОВ */
+  .tournament-card {
+    padding: 1rem 0.8rem !important;
+    min-height: auto !important;
+  }
+  
+  .tournament-card h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .tournament-card p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* КОМПАКТНАЯ ИНФОРМАЦИЯ О ТРЕНЕРЕ */
+  .trainer-content {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .trainer-photo {
+    width: 100% !important;
+    max-width: 200px !important;
+    margin: 0 auto !important;
+  }
+  
+  .trainer-info h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .trainer-info p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* КОМПАКТНАЯ ТАБЛИЦА РЕЙТИНГА */
+  .rating-table-container {
+    overflow-x: auto !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .rating-table th,
+  .rating-table td {
+    padding: 0.5rem 0.3rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .player-name {
+    font-size: 0.8rem !important;
+  }
+  
+  .player-level {
+    font-size: 0.7rem !important;
+  }
+  
+  /* КОМПАКТНАЯ ФОРМА ЗАПИСИ */
+  .booking-form {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem !important;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.6rem 0.8rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  /* КОМПАКТНЫЕ FAQ */
+  .faq-item {
+    margin-bottom: 1rem !important;
+  }
+  
+  .faq-question {
+    font-size: 1rem !important;
+    padding: 0.8rem !important;
+  }
+  
+  .faq-answer {
+    font-size: 0.9rem !important;
+    padding: 0.8rem !important;
+  }
+  
+  /* КОМПАКТНЫЕ КОНТАКТЫ */
+  .contact-item {
+    padding: 1rem 0.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .contact-item h4 {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .contact-item p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .utm-logo-img {
+    height: 70px !important;
+    width: 70px !important;
+  }
+  
+  .logo-text {
+    font-size: 1.8rem !important;
+    letter-spacing: 0.2px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Отключаем анимации логотипа на мобильных */
+  .header.scrolled .utm-logo-img,
+  .header.scrolled-down .utm-logo-img,
+  .header.scrolled-up .utm-logo-img {
+    height: 70px !important;
+    width: 70px !important;
+  }
+  
+  .header.scrolled .logo-text,
+  .header.scrolled-down .logo-text,
+  .header.scrolled-up .logo-text {
+    font-size: 1.8rem !important;
+    letter-spacing: 0.2px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* СУПЕР КОМПАКТНЫЕ СТИЛИ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ */
+  section {
+    padding: 1.5rem 0 !important;
+  }
+  
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+  
+  /* СУПЕР КОМПАКТНЫЕ КАРТОЧКИ */
+  .benefit-card,
+  .hall-card,
+  .tournament-card {
+    padding: 0.8rem 0.6rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .benefit-card h3,
+  .hall-card h3,
+  .tournament-card h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  .benefit-card p,
+  .hall-card p,
+  .tournament-card p {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* СУПЕР КОМПАКТНАЯ ИНФОРМАЦИЯ О ТРЕНЕРЕ */
+  .trainer-photo {
+    max-width: 150px !important;
+  }
+  
+  .trainer-info h3 {
+    font-size: 1.1rem !important;
+  }
+  
+  .trainer-info p {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* СУПЕР КОМПАКТНАЯ ТАБЛИЦА РЕЙТИНГА */
+  .rating-table th,
+  .rating-table td {
+    padding: 0.3rem 0.2rem !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .player-name {
+    font-size: 0.7rem !important;
+  }
+  
+  .player-level {
+    font-size: 0.6rem !important;
+  }
+  
+  /* СУПЕР КОМПАКТНАЯ ФОРМА */
+  .booking-form {
+    padding: 1rem 0.8rem !important;
+  }
+  
+  .form-group {
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .form-group label {
+    font-size: 0.8rem !important;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  /* СУПЕР КОМПАКТНЫЕ FAQ */
+  .faq-question {
+    font-size: 0.9rem !important;
+    padding: 0.6rem !important;
+  }
+  
+  .faq-answer {
+    font-size: 0.8rem !important;
+    padding: 0.6rem !important;
+  }
+  
+  /* СУПЕР КОМПАКТНЫЕ КОНТАКТЫ */
+  .contact-item {
+    padding: 0.8rem 0.6rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .contact-item h4 {
+    font-size: 0.9rem !important;
+  }
+  
+  .contact-item p {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+}
+
 /* Темная тема */
 [data-theme="dark"] {
   --primary-color: #10b981;
@@ -2224,11 +2549,11 @@ section:not(.hero) {
 
 .schedule-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
   position: relative;
   z-index: 2;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -2253,51 +2578,62 @@ section:not(.hero) {
 }
 
 .schedule-card {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1.5rem 1rem;
-  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+  padding: 1rem 0.75rem;
+  border-radius: 1rem;
   text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  min-height: 120px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
+
 .schedule-card:hover {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: var(--bg-white);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(6, 78, 59, 0.3), 0 4px 12px rgba(16, 185, 129, 0.2);
+  border-color: rgba(52, 211, 153, 0.3);
 }
 
 .day-name {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: var(--primary-color);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 1.2;
 }
 
 .schedule-card:hover .day-name {
   color: var(--bg-white);
 }
 
+.schedule-card:hover .time-slot {
+  color: var(--bg-white);
+  opacity: 1;
+}
+
 .time-slot {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  margin-bottom: 0;
   font-weight: 600;
-  opacity: 0.9;
+  opacity: 0.85;
   font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
   color: var(--text-dark);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
 }
 
 /* Форма записи */
@@ -4177,6 +4513,52 @@ section:not(.hero) {
     display: flex;
   }
   
+  /* МОБИЛЬНЫЕ СТИЛИ ЛОГОТИПА */
+  .utm-logo-img {
+    height: 120px !important;
+    width: 120px !important;
+  }
+  
+  .logo-text {
+    font-size: 4.5rem !important;
+    letter-spacing: 1px;
+    font-weight: 900 !important;
+    line-height: 0.95;
+  }
+  
+  /* Уменьшение логотипа на мобильных при скролле */
+  .header.scrolled .utm-logo-img {
+    height: 90px !important;
+    width: 90px !important;
+  }
+  
+  /* Логотип при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .utm-logo-img {
+    height: 70px !important;
+    width: 70px !important;
+  }
+  
+  /* Логотип при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .utm-logo-img {
+    height: 110px !important;
+    width: 110px !important;
+  }
+  
+  /* Уменьшение текста логотипа на мобильных при скролле */
+  .header.scrolled .logo-text {
+    font-size: 3.6rem !important;
+  }
+  
+  /* Текст логотипа при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .logo-text {
+    font-size: 3rem !important;
+  }
+  
+  /* Текст логотипа при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .logo-text {
+    font-size: 4.2rem !important;
+  }
+  
   .header .container {
     padding: 0.5rem 0;
     align-items: flex-start;
@@ -4215,9 +4597,49 @@ section:not(.hero) {
     margin-bottom: 0.5rem;
   }
   
+  .utm-logo-img {
+    height: 120px !important;
+    width: 120px !important;
+  }
+  
   .logo-text {
-    font-size: 1.5rem;
-    letter-spacing: 0.3px;
+    font-size: 4.5rem !important;
+    letter-spacing: 1px;
+    font-weight: 900 !important;
+    line-height: 0.95;
+  }
+  
+  /* Уменьшение логотипа на мобильных при скролле */
+  .header.scrolled .utm-logo-img {
+    height: 90px !important;
+    width: 90px !important;
+  }
+  
+  /* Логотип при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .utm-logo-img {
+    height: 70px !important;
+    width: 70px !important;
+  }
+  
+  /* Логотип при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .utm-logo-img {
+    height: 110px !important;
+    width: 110px !important;
+  }
+  
+  /* Уменьшение текста логотипа на мобильных при скролле */
+  .header.scrolled .logo-text {
+    font-size: 3.6rem !important;
+  }
+  
+  /* Текст логотипа при скролле вниз на мобильных (еще меньше) */
+  .header.scrolled-down .logo-text {
+    font-size: 3rem !important;
+  }
+  
+  /* Текст логотипа при скролле вверх на мобильных (увеличивается до среднего размера) */
+  .header.scrolled-up .logo-text {
+    font-size: 4.2rem !important;
   }
   
   /* Улучшения для элементов управления в мобильной версии */
@@ -4417,6 +4839,52 @@ section:not(.hero) {
     padding: 0;
   }
   
+  /* МОБИЛЬНЫЕ СТИЛИ ЛОГОТИПА ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ */
+  .utm-logo-img {
+    height: 100px !important;
+    width: 100px !important;
+  }
+  
+  .logo-text {
+    font-size: 3.8rem !important;
+    letter-spacing: 0.8px;
+    font-weight: 900 !important;
+    line-height: 0.95;
+  }
+  
+  /* Уменьшение логотипа на очень маленьких экранах при скролле */
+  .header.scrolled .utm-logo-img {
+    height: 80px !important;
+    width: 80px !important;
+  }
+  
+  /* Логотип при скролле вниз на очень маленьких экранах (еще меньше) */
+  .header.scrolled-down .utm-logo-img {
+    height: 65px !important;
+    width: 65px !important;
+  }
+  
+  /* Логотип при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
+  .header.scrolled-up .utm-logo-img {
+    height: 90px !important;
+    width: 90px !important;
+  }
+  
+  /* Уменьшение текста логотипа на очень маленьких экранах при скролле */
+  .header.scrolled .logo-text {
+    font-size: 3.2rem !important;
+  }
+  
+  /* Текст логотипа при скролле вниз на очень маленьких экранах (еще меньше) */
+  .header.scrolled-down .logo-text {
+    font-size: 2.8rem !important;
+  }
+  
+  /* Текст логотипа при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
+  .header.scrolled-up .logo-text {
+    font-size: 3.6rem !important;
+  }
+  
   .hero {
     padding: 0;
     margin-top: 0;
@@ -4445,22 +4913,24 @@ section:not(.hero) {
   }
   
   .schedule-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
     max-width: 100%;
   }
   
   .schedule-card {
-    padding: 1rem 0.75rem;
-    min-height: 100px;
+    padding: 0.8rem 0.6rem;
+    min-height: 80px;
+    border-radius: 0.8rem;
   }
   
   .day-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
   }
   
   .time-slot {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .schedule .section-title {
@@ -4506,45 +4976,48 @@ section:not(.hero) {
   }
   
   .logo-text {
-    font-size: 1.5rem;
+    font-size: 4.5rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 1px;
+    line-height: 0.95;
   }
   
   /* Уменьшение текста логотипа на мобильных при скролле */
   .header.scrolled .logo-text {
-    font-size: 1.2rem;
+    font-size: 3.6rem !important;
   }
   
   /* Текст логотипа при скролле вниз на мобильных (еще меньше) */
   .header.scrolled-down .logo-text {
-    font-size: 1rem;
+    font-size: 3rem !important;
   }
   
   /* Текст логотипа при скролле вверх на мобильных (увеличивается до среднего размера) */
   .header.scrolled-up .logo-text {
-    font-size: 1.4rem;
+    font-size: 4.2rem !important;
   }
   
   .utm-logo-img {
-    height: 80px;
-    width: 80px;
+    height: 120px !important;
+    width: 120px !important;
   }
   
   /* Уменьшение логотипа на мобильных при скролле */
   .header.scrolled .utm-logo-img {
-    height: 50px;
-    width: 50px;
+    height: 90px !important;
+    width: 90px !important;
   }
   
   /* Логотип при скролле вниз на мобильных (еще меньше) */
   .header.scrolled-down .utm-logo-img {
-    height: 35px;
-    width: 35px;
+    height: 70px !important;
+    width: 70px !important;
   }
   
   /* Логотип при скролле вверх на мобильных (увеличивается до среднего размера) */
   .header.scrolled-up .utm-logo-img {
-    height: 70px;
-    width: 70px;
+    height: 110px !important;
+    width: 110px !important;
   }
   
   .lang-trigger {
@@ -4946,8 +5419,13 @@ section:not(.hero) {
 /* Средние планшеты (768px - 1024px) */
 @media (max-width: 1024px) and (min-width: 769px) {
   .schedule-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .schedule-card {
+    padding: 0.9rem 0.7rem;
+    min-height: 85px;
   }
   
   .tournaments-grid {
@@ -5037,26 +5515,28 @@ section:not(.hero) {
   }
   
   .logo-text {
-    font-size: 1.3rem;
-    letter-spacing: 0.2px;
+    font-size: 3.8rem !important;
+    letter-spacing: 0.8px;
+    font-weight: 900 !important;
+    line-height: 0.95;
   }
   
   /* Уменьшение текста логотипа на очень маленьких экранах при скролле */
   .header.scrolled .logo-text {
-    font-size: 1.1rem;
-    letter-spacing: 0.1px;
+    font-size: 3.2rem !important;
+    letter-spacing: 0.6px;
   }
   
   /* Текст логотипа при скролле вниз на очень маленьких экранах (еще меньше) */
   .header.scrolled-down .logo-text {
-    font-size: 0.9rem;
-    letter-spacing: 0.05px;
+    font-size: 2.8rem !important;
+    letter-spacing: 0.4px;
   }
   
   /* Текст логотипа при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
   .header.scrolled-up .logo-text {
-    font-size: 1.3rem;
-    letter-spacing: 0.2px;
+    font-size: 3.6rem !important;
+    letter-spacing: 0.8px;
   }
 }
 
@@ -5439,44 +5919,45 @@ section:not(.hero) {
 }
   
   .utm-logo-img {
-    height: 70px;
-    width: 70px;
+    height: 100px !important;
+    width: 100px !important;
   }
   
   /* Уменьшение логотипа на очень маленьких экранах при скролле */
   .header.scrolled .utm-logo-img {
-    height: 45px;
-    width: 45px;
+    height: 80px !important;
+    width: 80px !important;
   }
   
   /* Логотип при скролле вниз на очень маленьких экранах (еще меньше) */
   .header.scrolled-down .utm-logo-img {
-    height: 30px;
-    width: 30px;
+    height: 65px !important;
+    width: 65px !important;
   }
   
   /* Логотип при скролле вверх на очень маленьких экранах (увеличивается до среднего размера) */
   .header.scrolled-up .utm-logo-img {
-    height: 60px;
-    width: 60px;
+    height: 90px !important;
+    width: 90px !important;
   }
   
   .schedule-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
   }
   
   .schedule-card {
-    padding: 1rem 0.5rem;
-    min-height: 80px;
+    padding: 0.7rem 0.5rem;
+    min-height: 70px;
+    border-radius: 0.7rem;
   }
   
   .day-name {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
   }
   
   .time-slot {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
-}
 
