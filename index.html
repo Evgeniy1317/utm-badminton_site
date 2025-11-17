@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DTM Badminton Club - Запись на тренировки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=65">
+  <link rel="stylesheet" href="css/mobile.css?v=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>">
+</head>
+<body>
+
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="container">
+      <div class="logo-section">
+        <a href="#hero" class="logo-link">
+          <img src="css/img/photo_5193023805335929580_y-removebg-preview.png" alt="DTM Logo" class="utm-logo-img">
+        </a>
+        <h1 class="logo-text">Badminton Club</h1>
+      </div>
+      
+      <div class="header-bottom">
+        <nav class="nav">
+        <a href="#about">О нас</a>
+        <a href="#trainer">Тренер</a>
+        <a href="#halls">Залы</a>
+        <a href="#schedule">Расписание</a>
+        <a href="#booking">Запись</a>
+        <a href="tournaments.html">Турниры<span class="notification-badge" id="tournamentBadge">1</span></a>
+        <a href="rating.html">Рейтинг</a>
+        <a href="gallery.html">Галерея</a>
+        <a href="history.html">История</a>
+        <a href="#contact">Контакты</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      
+      <!-- Мобильное меню будет добавлено позже -->
+      
+      <div class="header-controls">
+        <!-- Десктопный переключатель темы -->
+        <div class="theme-switcher desktop-theme-switcher">
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" class="theme-switch__checkbox">
+            <div class="theme-switch__container">
+              <div class="theme-switch__clouds"></div>
+              <div class="theme-switch__stars-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 102.607 48.1635 101.831 49.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="theme-switch__circle-container">
+                <div class="theme-switch__sun-moon-container">
+                  <div class="theme-switch__moon">
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+        
+        <!-- Мобильный переключатель темы -->
+        <div class="theme-switcher mobile-theme-switcher">
+          <label class="theme-switch" for="mobileThemeToggle">
+            <input type="checkbox" id="mobileThemeToggle" class="theme-switch__checkbox">
+            <div class="theme-switch__container">
+              <div class="theme-switch__clouds"></div>
+              <div class="theme-switch__stars-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 102.607 48.1635 101.831 49.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="theme-switch__circle-container">
+                <div class="theme-switch__sun-moon-container">
+                  <div class="theme-switch__moon">
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+        
+        <div class="language-switcher">
+          <button class="lang-trigger" id="langTrigger">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU" class="current-flag">
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option active" data-lang="ru" title="Русский">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU">
+            </button>
+            <button class="lang-option" data-lang="ro" title="Română">
+              <img src="css/img/321210.png" alt="RO">
+            </button>
+            <button class="lang-option" data-lang="en" title="English">
+              <img src="css/img/Flag_of_the_United_Kingdom.png" alt="EN">
+            </button>
+          </div>
+        </div>
+        </div>
+        
+        <!-- Мобильное гамбургер-меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <h3>Меню</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+          <span class="close-icon">×</span>
+        </button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="#hero" class="mobile-nav-link" data-section="hero">Главная</a>
+        <a href="#about" class="mobile-nav-link" data-section="about">О нас</a>
+        <a href="#trainer" class="mobile-nav-link" data-section="trainer">Тренер</a>
+        <a href="#halls" class="mobile-nav-link" data-section="halls">Залы</a>
+        <a href="#schedule" class="mobile-nav-link" data-section="schedule">Расписание</a>
+        <a href="#booking" class="mobile-nav-link" data-section="booking">Запись</a>
+        <a href="tournaments.html" class="mobile-nav-link">Турниры</a>
+        <a href="rating.html" class="mobile-nav-link">Рейтинг</a>
+        <a href="gallery.html" class="mobile-nav-link">Галерея</a>
+        <a href="history.html" class="mobile-nav-link">История</a>
+        <a href="#contact" class="mobile-nav-link" data-section="contact">Контакты</a>
+        <a href="#faq" class="mobile-nav-link" data-section="faq">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Главная секция -->
+  <section id="hero" class="hero">
+    <video class="hero-video" 
+           muted 
+           loop 
+           autoplay
+           playsinline 
+           preload="metadata" 
+           webkit-playsinline="true"
+           x5-video-player-type="h5"
+           x5-video-player-fullscreen="true"
+           x5-video-orientation="portrait"
+           controls="false"
+           disablepictureinpicture
+           controlslist="nodownload nofullscreen noremoteplayback"
+           disableRemotePlayback
+           poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+           style="display: block;">
+      <source src="video/badminton-video.mp4" type="video/mp4">
+      <source src="video/badminton-video.mp4" type="video/quicktime">
+      Ваш браузер не поддерживает видео.
+    </video>
+    <div class="hero-fallback" style="display: none;">
+      <div class="hero-bg-image"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <button class="video-play-btn" id="videoPlayBtn" style="display: none;">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="5,3 19,12 5,21"></polygon>
+      </svg>
+    </button>
+    <div class="container">
+      <div class="hero-content">
+        <h1 id="hero-title"></h1>
+        <p id="hero-subtitle"></p>
+        <a href="#booking" class="cta-button" id="hero-btn"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О нас -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll"></h2>
+      <div class="about-content animate-on-scroll">
+        <div class="about-text">
+          <p></p>
+          <p></p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">💪</div>
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🧠</div>
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">👥</div>
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🏆</div>
+            <h3></h3>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Тренер -->
+  <section id="trainer" class="trainer">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll"></h2>
+      <div class="trainer-content animate-on-scroll">
+        <div class="trainer-photo">
+          <img src="css/img/photo_5334684101774539093_y.jpg" alt="Sturza Anzor - тренер по бадминтону" class="trainer-img">
+        </div>
+        <div class="trainer-info">
+          <h3></h3>
+          <p></p>
+          <p></p>
+          <div class="trainer-stats">
+            <div class="stat-item">
+              <span class="stat-number">🎯</span>
+              <span class="stat-label"></span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">🏸</span>
+              <span class="stat-label"></span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">🤝</span>
+              <span class="stat-label"></span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">⚡</span>
+              <span class="stat-label"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Залы -->
+  <section id="halls" class="halls">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll"></h2>
+      <div class="halls-grid animate-on-scroll">
+        <div class="hall-card">
+          <div class="hall-image">
+            <img src="css/img/photo_5267307682786831695_c.jpg" alt="Зал №1 - Спортивный комплекс UTM" class="hall-img">
+          </div>
+          <div class="hall-content">
+            <h3 class="hall-title"></h3>
+            <span class="hall-status status-available"></span>
+            <div class="hall-info">
+              <p></p>
+            </div>
+            <div class="hall-address">
+              <div class="address-line">CS UTM, sect. BOTANICA, str. DACIA 41/1</div>
+            </div>
+            <div class="location-btn-container">
+              <a href="https://maps.google.com/?q=CS+UTM+sect+BOTANICA+str+DACIA+41/1+Chisinau" class="location-btn" target="_blank">
+                📍
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="hall-card">
+          <div class="hall-image">
+            <img src="css/img/photo_5289744394372640841_y.jpg" alt="Зал №2 - Новый комплекс" class="hall-img">
+          </div>
+          <div class="hall-content">
+            <h3 class="hall-title"></h3>
+            <span class="hall-status status-coming-soon"></span>
+            <div class="hall-info">
+              <p></p>
+            </div>
+            <div class="hall-address">
+              <div class="address-line">CS UTM, RÎSCANI, str. Studenților 3/8</div>
+            </div>
+            <div class="location-btn-container">
+              <a href="https://maps.google.com/?q=CS+UTM+sectorul+RISCANI+str+Studentilor+3/8+Chisinau" class="location-btn" target="_blank">
+                📍
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Расписание -->
+  <section id="schedule" class="schedule">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll"></h2>
+      <div class="schedule-grid animate-on-scroll">
+        <div class="schedule-card">
+          <div class="day-name"></div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name"></div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name"></div>
+          <div class="time-slot">18:30 - 21:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name"></div>
+          <div class="time-slot">10:00 - 12:00</div>
+        </div>
+        <div class="schedule-card">
+          <div class="day-name"></div>
+          <div class="time-slot">10:00 - 12:00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Форма записи -->
+  <section id="booking" class="booking">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll"></h2>
+      <div class="booking-form animate-on-scroll">
+        <div class="success-message" id="successMessage">
+        </div>
+        
+        <form id="bookingForm" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <!-- Скрытое поле для защиты от ботов -->
+          <div style="display: none;">
+            <label>Не заполняйте это поле: <input name="bot-field"></label>
+          </div>
+          <div class="form-group">
+            <label for="name"></label>
+            <input type="text" id="name" name="name" required>
+            <div class="error-message" id="nameError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone"></label>
+            <input type="tel" id="phone" name="phone" placeholder="+373 XX XXX XXX" required>
+            <div class="error-message" id="phoneError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email"></label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+            <div class="error-message" id="emailError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="level"></label>
+            <select id="level" name="level">
+              <option value="beginner"></option>
+              <option value="intermediate"></option>
+              <option value="advanced"></option>
+              <option value="professional"></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="hall"></label>
+            <select id="hall" name="hall">
+              <option value="hall1"></option>
+              <option value="hall2" disabled></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="day"></label>
+            <select id="day" name="day">
+              <option value="monday"></option>
+              <option value="tuesday"></option>
+              <option value="wednesday"></option>
+              <option value="thursday"></option>
+              <option value="friday"></option>
+              <option value="saturday"></option>
+              <option value="sunday"></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message"></label>
+            <textarea id="message" name="message" rows="4" placeholder=""></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;"></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Контакты</h2>
+      <div class="contact-content animate-on-scroll">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text">
+              <h4>Телефон</h4>
+              <p><a href="tel:+37368851307" class="phone-link">+373 68 851 307</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:evgenijurin998@gmail.com" class="email-link">evgenijurin998@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              <h4>Адрес</h4>
+              <p><a href="https://maps.google.com/?q=CS+UTM+sect+BOTANICA+str+DACIA+41/1+Chisinau" class="address-link" target="_blank">CS UTM, sect. BOTANICA, str. DACIA 41/1</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <div class="contact-text">
+              <h4>Время работы</h4>
+              <p><span class="hours-text">Пн-Ср: 18:30-21:00<br>Сб-Вс: 10:00-12:00</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info">
+          <h3>Свяжитесь с тренером</h3>
+          <p>Для быстрой связи и получения консультации по тренировкам, свяжитесь с нашим тренером:</p>
+          
+          <div class="social-links">
+            <a href="https://t.me/qweqweqweeqwe" class="social-link telegram-link" target="_blank">
+              💬 Написать в Telegram
+            </a>
+            <a href="https://www.instagram.com/jenyaa_u/" class="social-link instagram-link" target="_blank">
+              📷 Instagram
+            </a>
+            <a href="viber://chat?number=+37368851307" class="social-link viber-link" target="_blank">
+              💜 Написать в Viber
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Часто задаваемые вопросы</h2>
+      <div class="faq-content animate-on-scroll">
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏸 С какого возраста можно заниматься бадминтоном?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Бадминтон подходит для всех возрастов! Мы принимаем детей от 8 лет и взрослых любого возраста. Для детей младше 8 лет предлагаем специальные программы развития координации.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>💰 Сколько стоит тренировка?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Стоимость одной тренировки составляет 50 лей. При покупке абонемента на месяц стоимость снижается до 35 лей за тренировку. Первое занятие - бесплатно!</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🎒 Что нужно принести на первую тренировку?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Для первой тренировки достаточно спортивной одежды и кроссовок. Ракетки и воланы мы предоставляем бесплатно. Рекомендуем взять с собой воду.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>👥 Сколько человек в группе?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>В группах для начинающих максимум 8 человек, для продвинутых - до 6 человек. Это позволяет тренеру уделить внимание каждому ученику и обеспечить качественное обучение.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>📍 Где проходят тренировки?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Тренировки проходят в современных залах UTM: Зал №1 в Ботанике (CS UTM, sect. BOTANICA, str. DACIA 41/1) и Зал №2 в Рышканах (скоро откроется).</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏆 Можно ли участвовать в турнирах?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Да! Мы регулярно организуем внутренние турниры для наших учеников и участвуем в городских соревнованиях. Турниры помогают проверить навыки и получить опыт игры.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>⏰ Можно ли изменить время тренировки?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Да, мы стараемся подстроиться под ваше расписание. При наличии свободных мест в других группах можно перейти на удобное время. Свяжитесь с тренером для уточнения.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>🏥 Нужна ли справка от врача?</h3>
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-answer">
+              <p>Для занятий бадминтоном справка от врача не требуется. Однако рекомендуем проконсультироваться с врачом, если у вас есть хронические заболевания или травмы.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-cta">
+          <span class="bubble bubble-1"></span>
+          <span class="bubble bubble-2"></span>
+          <span class="bubble bubble-3"></span>
+          <span class="bubble bubble-4"></span>
+          <span class="bubble bubble-5"></span>
+          <div class="faq-cta-content">
+            <h3>Не нашли ответ на свой вопрос?</h3>
+            <p>Свяжитесь с нашим тренером, и мы с радостью ответим на все ваши вопросы!</p>
+            <div class="faq-contact-buttons">
+              <a href="https://t.me/qweqweqweeqwe" class="faq-contact-btn telegram" target="_blank">
+                💬 Написать в Telegram
+              </a>
+              <a href="tel:+37368851307" class="faq-contact-btn phone">
+                📞 Позвонить
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Подвал сайта -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <!-- Логотип и основная информация -->
+        <div class="footer-brand">
+          <div class="footer-logo-section">
+            <img src="css/img/ChatGPT Image 10 сент. 2025 г., 23_26_04.png" alt="DTM Logo" class="footer-logo">
+            <div class="footer-brand-text">
+              <h3>DTM Badminton Club</h3>
+              <p>Официальный клуб при UTM</p>
+            </div>
+          </div>
+          <p class="footer-description">
+            Профессиональные тренировки по бадминтону в современных залах Технического университета Молдовы. 
+            Развитие спорта и здорового образа жизни для студентов и всех желающих.
+          </p>
+        </div>
+
+        <!-- Информация о залах -->
+        <div class="footer-halls">
+          <h4>Наши залы при UTM</h4>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №1 - Ботаника</h5>
+              <p>CS UTM, sect. BOTANICA<br>str. DACIA 41/1</p>
+              <span class="hall-status active">Доступен</span>
+            </div>
+          </div>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №2 - Рышканы</h5>
+              <p>CS UTM, RÎSCANI<br>str. Studenților 3/8</p>
+              <span class="hall-status coming-soon">Скоро откроется</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Контакты и социальные сети -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <a href="tel:+37368851307" class="contact-link">+373 68 851 307</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <a href="mailto:evgenijurin998@gmail.com" class="contact-link">evgenijurin998@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <a href="https://t.me/qweqweqweeqwe" class="contact-link" target="_blank">Telegram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📷</div>
+            <a href="https://www.instagram.com/jenyaa_u/" class="contact-link" target="_blank">Instagram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💜</div>
+            <a href="viber://chat?number=+37368851307" class="contact-link" target="_blank">Viber</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <span class="contact-text">Пн-Ср: 18:30-21:00<br>Сб-Вс: 10:00-12:00</span>
+          </div>
+        </div>
+
+        <!-- Быстрые ссылки -->
+        <div class="footer-links">
+          <h4>Быстрые ссылки</h4>
+          <ul class="footer-nav">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#trainer">Тренер</a></li>
+            <li><a href="#halls">Залы</a></li>
+            <li><a href="#schedule">Расписание</a></li>
+            <li><a href="#booking">Запись</a></li>
+            <li><a href="tournaments.html">Турниры</a></li>
+            <li><a href="rating.html">Рейтинг</a></li>
+            <li><a href="gallery.html">Галерея</a></li>
+            <li><a href="history.html">История</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Нижняя часть футера -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <p>© 2025 DTM Badminton Club. Все права защищены.</p>
+        </div>
+        <div class="footer-bottom-center">
+          <p>Технический университет Молдовы</p>
+        </div>
+        <div class="footer-bottom-right">
+          <p>Сделано с ❤️ для любителей бадминтона</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно для просмотра фото -->
+  <div class="photo-modal" id="photoModal">
+    <button class="photo-modal-close" id="closePhotoModal">&times;</button>
+    <img src="" alt="Увеличенное фото" id="modalPhoto">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

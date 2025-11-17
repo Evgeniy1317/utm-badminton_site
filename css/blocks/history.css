@@ -1,0 +1,174 @@
+﻿/* ===== РРЎРўРћР РРЇ Р‘РђР”РњРРќРўРћРќРђ ===== */
+.history {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+  position: relative;
+}
+
+.history::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="history-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23e8f5e8" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23history-dots)"/></svg>');
+  pointer-events: none;
+}
+
+.history-content {
+  position: relative;
+  z-index: 1;
+}
+
+.history-intro {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+  padding: 3rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('img/78f95d70e4420e0118ea872e2fe5d646.jpeg');
+  background-size: 120%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.history-text h3 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.history-text p {
+  color: var(--text-light);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.history-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history-placeholder {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 1.5rem;
+  padding: 3rem;
+  text-align: center;
+  color: var(--bg-white);
+  box-shadow: var(--shadow-md);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.history-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.history-placeholder p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.history-photo {
+  width: 100%;
+  height: 200px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid var(--primary-color);
+}
+
+/* РЎРїРµС†РёР°Р»СЊРЅС‹Рµ СЃС‚РёР»Рё РґР»СЏ РєРѕРЅС‚РµР№РЅРµСЂР° СЃ badmintonbane1 */
+.history-photo:has(.badminton-court-photo) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  padding: 10px !important;
+}
+
+.history-photo:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+}
+
+.court-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 1.4rem;
+}
+
+/* РЎРїРµС†РёР°Р»СЊРЅС‹Рµ СЃС‚РёР»Рё РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ badmintonbane1.jpg */
+.badminton-court-photo {
+  object-fit: cover !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border: 2px solid var(--primary-color) !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
+  border-radius: 0.6rem !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transform: scale(0.95) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.badminton-court-photo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--accent-color);
+  border-radius: 0.4rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+.badminton-court-photo:hover {
+  transform: scale(0.95) translateY(-2px) !important;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* РњРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° С„РѕС‚Рѕ */

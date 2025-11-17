@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>История - DTM Badminton Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=62">
+  <link rel="stylesheet" href="css/mobile.css?v=1">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>">
+</head>
+<body>
+
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="container">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <img src="css/img/photo_5193023805335929580_y-removebg-preview.png" alt="DTM Logo" class="utm-logo-img">
+        </a>
+        <h1 class="logo-text">Badminton Club</h1>
+      </div>
+      
+      <div class="header-bottom">
+        <nav class="nav">
+        <a href="index.html#about">О нас</a>
+        <a href="index.html#trainer">Тренер</a>
+        <a href="index.html#halls">Залы</a>
+        <a href="index.html#schedule">Расписание</a>
+        <a href="index.html#booking">Запись</a>
+        <a href="tournaments.html">Турниры<span class="notification-badge" id="tournamentBadge">1</span></a>
+        <a href="rating.html">Рейтинг</a>
+        <a href="gallery.html">Галерея</a>
+        <a href="history.html">История</a>
+        <a href="index.html#contact">Контакты</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+      
+      <div class="header-controls">
+        <!-- Десктопный переключатель темы -->
+        <div class="theme-switcher desktop-theme-switcher">
+          <label class="theme-switch" for="themeToggle">
+            <input type="checkbox" id="themeToggle" class="theme-switch__checkbox">
+            <div class="theme-switch__container">
+              <div class="theme-switch__clouds"></div>
+              <div class="theme-switch__stars-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 102.607 48.1635 101.831 49.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="theme-switch__circle-container">
+                <div class="theme-switch__sun-moon-container">
+                  <div class="theme-switch__moon">
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+        
+        <!-- Мобильный переключатель темы -->
+        <div class="theme-switcher mobile-theme-switcher">
+          <label class="theme-switch" for="mobileThemeToggle">
+            <input type="checkbox" id="mobileThemeToggle" class="theme-switch__checkbox">
+            <div class="theme-switch__container">
+              <div class="theme-switch__clouds"></div>
+              <div class="theme-switch__stars-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 102.607 48.1635 101.831 49.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <div class="theme-switch__circle-container">
+                <div class="theme-switch__sun-moon-container">
+                  <div class="theme-switch__moon">
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+        
+        <div class="language-switcher">
+          <button class="lang-trigger" id="langTrigger">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU" class="current-flag">
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6,9 12,15 18,9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option active" data-lang="ru" title="Русский">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeT0iNiIgd2lkdGg9IjI0IiBoZWlnaHQ9IjYiIGZpbGw9IiMwMDUyQjQiLz4KPHJlY3QgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRkYwMDAwIi8+Cjwvc3ZnPgo=" alt="RU">
+            </button>
+            <button class="lang-option" data-lang="ro" title="Română">
+              <img src="css/img/321210.png" alt="RO">
+            </button>
+            <button class="lang-option" data-lang="en" title="English">
+              <img src="css/img/Flag_of_the_United_Kingdom.png" alt="EN">
+            </button>
+          </div>
+        </div>
+        </div>
+        
+        <!-- Мобильное гамбургер-меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <h3>Меню</h3>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть меню">
+          <span class="close-icon">×</span>
+        </button>
+      </div>
+      <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-link">Главная</a>
+        <a href="index.html#about" class="mobile-nav-link">О нас</a>
+        <a href="index.html#trainer" class="mobile-nav-link">Тренер</a>
+        <a href="index.html#halls" class="mobile-nav-link">Залы</a>
+        <a href="index.html#schedule" class="mobile-nav-link">Расписание</a>
+        <a href="index.html#booking" class="mobile-nav-link">Запись</a>
+        <a href="tournaments.html" class="mobile-nav-link">Турниры</a>
+        <a href="rating.html" class="mobile-nav-link">Рейтинг</a>
+        <a href="gallery.html" class="mobile-nav-link">Галерея</a>
+        <a href="history.html" class="mobile-nav-link">История</a>
+        <a href="index.html#contact" class="mobile-nav-link">Контакты</a>
+        <a href="index.html#faq" class="mobile-nav-link">FAQ</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- История бадминтона -->
+  <section id="history" class="history">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">История бадминтона</h2>
+      
+      <div class="history-content">
+        <!-- Основная информация -->
+        <div class="history-intro animate-on-scroll">
+          <div class="history-text">
+            <h3>🏸 Происхождение игры</h3>
+            <p>Бадминтон - одна из самых древних игр с ракеткой. Его история насчитывает более 2000 лет! Игра зародилась в Древней Греции, где называлась "баттлдор и шаттлкок", а затем распространилась по всему миру.</p>
+            <p>Современный бадминтон получил свое название от английского поместья Бадминтон-хаус, где в 1873 году герцог Бофорт организовал первую демонстрацию игры.</p>
+          </div>
+          <div class="history-image">
+            <div class="history-photo">
+              <img src="css/img/i (1).webp" alt="Древние корни бадминтона" class="court-photo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Интересные факты -->
+        <div class="facts-section animate-on-scroll">
+          <h3>🎯 Интересные факты</h3>
+          <div class="facts-grid">
+            <div class="fact-card">
+              <div class="fact-icon">⚡</div>
+              <h4>Самый быстрый спорт</h4>
+              <p>Воланы в бадминтоне могут развивать скорость до 493 км/ч - это быстрее, чем в любом другом виде спорта!</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🌍</div>
+              <h4>Олимпийский статус</h4>
+              <p>Бадминтон стал олимпийским видом спорта в 1992 году в Барселоне. С тех пор он завоевал сердца миллионов зрителей.</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🏆</div>
+              <h4>Популярность в мире</h4>
+              <p>Бадминтон занимает второе место по популярности в мире после футбола, в него играют более 220 миллионов человек!</p>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🧠</div>
+              <h4>Польза для здоровья</h4>
+              <p>Игра в бадминтон сжигает до 450 калорий в час и улучшает координацию, реакцию и выносливость.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правила и основы -->
+        <div class="rules-section animate-on-scroll">
+          <h3>📋 Что нужно знать о бадминтоне</h3>
+          <div class="rules-content">
+            <div class="rules-text">
+              <h4>🎾 Основные правила:</h4>
+              <ul>
+                <li><strong>Цель игры:</strong> Перебросить волан через сетку так, чтобы соперник не смог его отбить</li>
+                <li><strong>Счет:</strong> Игра ведется до 21 очка, разница должна быть минимум 2 очка</li>
+                <li><strong>Подача:</strong> Должна выполняться снизу, волан должен попасть в диагональное поле соперника</li>
+                <li><strong>Очки:</strong> Засчитываются при ошибке соперника или когда волан падает на его половине</li>
+              </ul>
+              
+              <h4>🏸 Экипировка:</h4>
+              <ul>
+                <li><strong>Ракетка:</strong> Вес 80-100 грамм, длина до 68 см</li>
+                <li><strong>Волан:</strong> 16 перьев или синтетический, вес 4.74-5.50 грамм</li>
+                <li><strong>Сетка:</strong> Высота 1.55 м, ширина 6.1 м</li>
+                <li><strong>Корт:</strong> 13.4×6.1 м для одиночной игры, 13.4×5.18 м для парной</li>
+              </ul>
+            </div>
+            <div class="rules-image">
+              <div class="history-photo">
+                <img src="css/img/5f38eba5-7ded-44da-bed9-e3935c3a14c5.jpeg" alt="Размеры корта и правила бадминтона" class="court-photo badminton-court-photo">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Подвал сайта -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <!-- Логотип и основная информация -->
+        <div class="footer-brand">
+          <div class="footer-logo-section">
+            <img src="css/img/ChatGPT Image 10 сент. 2025 г., 23_26_04.png" alt="DTM Logo" class="footer-logo">
+            <div class="footer-brand-text">
+              <h3>DTM Badminton Club</h3>
+              <p>Официальный клуб при UTM</p>
+            </div>
+          </div>
+          <p class="footer-description">
+            Профессиональные тренировки по бадминтону в современных залах Технического университета Молдовы. 
+            Развитие спорта и здорового образа жизни для студентов и всех желающих.
+          </p>
+        </div>
+
+        <!-- Информация о залах -->
+        <div class="footer-halls">
+          <h4>Наши залы при UTM</h4>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №1 - Ботаника</h5>
+              <p>CS UTM, sect. BOTANICA<br>str. DACIA 41/1</p>
+              <span class="hall-status active">Доступен</span>
+            </div>
+          </div>
+          <div class="hall-item">
+            <div class="hall-icon">🏸</div>
+            <div class="hall-details">
+              <h5>Зал №2 - Рышканы</h5>
+              <p>CS UTM, RÎSCANI<br>str. Studenților 3/8</p>
+              <span class="hall-status coming-soon">Скоро откроется</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Контакты и социальные сети -->
+        <div class="footer-contact">
+          <h4>Контакты</h4>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <a href="tel:+37368851307" class="contact-link">+373 68 851 307</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <a href="mailto:evgenijurin998@gmail.com" class="contact-link">evgenijurin998@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <a href="https://t.me/qweqweqweeqwe" class="contact-link" target="_blank">Telegram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📷</div>
+            <a href="https://www.instagram.com/jenyaa_u/" class="contact-link" target="_blank">Instagram</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💜</div>
+            <a href="viber://chat?number=+37368851307" class="contact-link" target="_blank">Viber</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <span class="contact-text">Пн-Ср: 18:30-21:00<br>Сб-Вс: 10:00-12:00</span>
+          </div>
+        </div>
+
+        <!-- Быстрые ссылки -->
+        <div class="footer-links">
+          <h4>Быстрые ссылки</h4>
+          <ul class="footer-nav">
+            <li><a href="index.html#about">О нас</a></li>
+            <li><a href="index.html#trainer">Тренер</a></li>
+            <li><a href="index.html#halls">Залы</a></li>
+            <li><a href="index.html#schedule">Расписание</a></li>
+            <li><a href="index.html#booking">Запись</a></li>
+            <li><a href="tournaments.html">Турниры</a></li>
+            <li><a href="rating.html">Рейтинг</a></li>
+            <li><a href="gallery.html">Галерея</a></li>
+            <li><a href="history.html">История</a></li>
+            <li><a href="index.html#contact">Контакты</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Нижняя часть футера -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-left">
+          <p>© 2025 DTM Badminton Club. Все права защищены.</p>
+        </div>
+        <div class="footer-bottom-center">
+          <p>Технический университет Молдовы</p>
+        </div>
+        <div class="footer-bottom-right">
+          <p>Сделано с ❤️ для любителей бадминтона</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно для просмотра фото -->
+  <div class="photo-modal" id="photoModal">
+    <button class="photo-modal-close" id="closePhotoModal">&times;</button>
+    <img src="" alt="Увеличенное фото" id="modalPhoto">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
