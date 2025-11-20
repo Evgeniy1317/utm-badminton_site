@@ -130,34 +130,7 @@
 }
 
 [data-theme="dark"] .booking {
-  background: linear-gradient(135deg, #111827 0%, #0f172a 30%, #1e293b 60%, #1f2937 100%);
-}
-
-[data-theme="dark"] .booking::before {
-  background: 
-    linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
-    linear-gradient(225deg, rgba(6, 78, 59, 0.12) 0%, transparent 50%),
-    linear-gradient(45deg, rgba(52, 211, 153, 0.1) 0%, transparent 60%);
-  z-index: 0;
-  animation: waveGradient 15s ease-in-out infinite;
-}
-
-[data-theme="dark"] .booking::after {
-  background-image: 
-    url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q30,40 60,60 T120,60 L120,120 L0,120 Z' fill='rgba(16, 185, 129, 0.18)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg width='150' height='150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,75 Q37.5,50 75,75 T150,75 L150,150 L0,150 Z' fill='rgba(6, 78, 59, 0.15)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z' fill='rgba(52, 211, 153, 0.2)'/%3E%3C/svg%3E");
-  background-size: 
-    300% 300%,
-    350% 350%,
-    280% 280%;
-  background-position: 
-    0% 0%,
-    50% 50%,
-    100% 100%;
-  background-repeat: repeat;
-  opacity: 0.6;
-  animation: waveMove 20s ease-in-out infinite;
+  background: #ffffff;
 }
 
 [data-theme="dark"] .tournaments {
@@ -1795,39 +1768,6 @@ section:not(.hero) {
   }
 }
 
-@keyframes waveMove {
-  0%, 100% {
-    background-position: 0% 0%, 50% 50%, 100% 100%;
-    transform: translateY(0px) scale(1);
-  }
-  25% {
-    background-position: 30% 15%, 65% 45%, 85% 85%;
-    transform: translateY(-15px) scale(1.02);
-  }
-  50% {
-    background-position: 60% 30%, 75% 65%, 70% 75%;
-    transform: translateY(0px) scale(1);
-  }
-  75% {
-    background-position: 90% 15%, 35% 55%, 15% 65%;
-    transform: translateY(15px) scale(0.98);
-  }
-}
-
-@keyframes waveGradient {
-  0%, 100% {
-    background-position: 0% 0%, 100% 100%, 50% 50%;
-    opacity: 1;
-  }
-  33% {
-    background-position: 30% 20%, 70% 80%, 80% 30%;
-    opacity: 0.9;
-  }
-  66% {
-    background-position: 60% 40%, 40% 60%, 20% 70%;
-    opacity: 0.95;
-  }
-}
 
 .about .section-title {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -2324,65 +2264,18 @@ section:not(.hero) {
 
 /* Форма записи */
 .booking {
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 30%, #d1fae5 60%, #a7f3d0 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.booking::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-    linear-gradient(225deg, rgba(6, 78, 59, 0.08) 0%, transparent 50%),
-    linear-gradient(45deg, rgba(52, 211, 153, 0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-  animation: waveGradient 15s ease-in-out infinite;
-}
-
-.booking::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q30,40 60,60 T120,60 L120,120 L0,120 Z' fill='rgba(16, 185, 129, 0.12)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg width='150' height='150' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,75 Q37.5,50 75,75 T150,75 L150,150 L0,150 Z' fill='rgba(6, 78, 59, 0.1)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z' fill='rgba(52, 211, 153, 0.14)'/%3E%3C/svg%3E");
-  background-size: 
-    300% 300%,
-    350% 350%,
-    280% 280%;
-  background-position: 
-    0% 0%,
-    50% 50%,
-    100% 100%;
-  background-repeat: repeat;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.8;
-  animation: waveMove 20s ease-in-out infinite;
+  background: #ffffff;
 }
 
 .booking-form {
   max-width: 600px;
   margin: 0 auto;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  background: #ffffff;
   padding: 3rem;
   border-radius: 1.5rem;
   box-shadow: 
-    0 10px 40px rgba(6, 78, 59, 0.12),
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+    0 10px 40px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 2;
 }
@@ -2713,11 +2606,67 @@ section:not(.hero) {
 .rating-table th.winrate-col {
   width: 100px;
   text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.rating-table th.points-col:hover,
+.rating-table th.matches-col:hover,
+.rating-table th.wins-col:hover,
+.rating-table th.winrate-col:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.rating-table th.points-col::after,
+.rating-table th.matches-col::after,
+.rating-table th.wins-col::after,
+.rating-table th.winrate-col::after {
+  content: ' ↕';
+  opacity: 0.5;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
+}
+
+.rating-table th.sort-asc::after {
+  content: ' ↑';
+  opacity: 1;
+}
+
+.rating-table th.sort-desc::after {
+  content: ' ↓';
+  opacity: 1;
 }
 
 .rating-table th.trend-col {
   width: 80px;
   text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.rating-table th.trend-col:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.rating-table th.trend-col::after {
+  content: ' ↕';
+  opacity: 0.5;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
+}
+
+.rating-table th.trend-col.sort-asc::after {
+  content: ' ↑';
+  opacity: 1;
+}
+
+.rating-table th.trend-col.sort-desc::after {
+  content: ' ↓';
+  opacity: 1;
 }
 
 .rating-row {
@@ -3040,6 +2989,9 @@ section:not(.hero) {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-height: 350px;
+  position: relative;
 }
 
 .history-placeholder {
@@ -3070,17 +3022,30 @@ section:not(.hero) {
 
 .history-photo {
   width: 100%;
-  height: 200px;
+  min-height: 350px;
+  height: auto;
+  max-height: 500px;
   border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block !important;
   margin: 0 auto;
   border: 1px solid var(--primary-color);
+  background: #f8f9fa;
+}
+
+.history-photo img,
+.history-photo .court-photo {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 350px !important;
+  object-fit: cover !important;
+  object-position: center !important;
 }
 
 /* Специальные стили для контейнера с badmintonbane1 */
@@ -3098,13 +3063,32 @@ section:not(.hero) {
   border-color: var(--accent-color);
 }
 
+/* Гарантируем отображение изображения в блоке происхождения игры */
+.history-intro .history-image .history-photo img.court-photo {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 350px !important;
+  max-height: 500px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  background: transparent !important;
+}
+
 .court-photo {
   width: 100%;
   height: 100%;
+  min-height: 350px;
+  max-height: 500px;
   object-fit: cover;
   object-position: center;
-  display: block;
+  display: block !important;
   border-radius: 1.4rem;
+  background: #f8f9fa;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Специальные стили для изображения badmintonbane1.jpg */
@@ -5119,7 +5103,21 @@ section:not(.hero) {
   }
   
   .history-photo {
-    height: 150px;
+    min-height: 250px;
+    height: auto;
+    max-height: 400px;
+  }
+  
+  .history-photo .court-photo {
+    min-height: 250px;
+    max-height: 400px;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .history-image {
+    min-height: 250px;
   }
   
   .court-photo {

@@ -1,0 +1,21 @@
+{
+  "name": "badminton-club-server",
+  "version": "1.0.0",
+  "description": "Сервер для сайта Badminton Club с поддержкой MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.6.5"
+  },
+  "keywords": [
+    "badminton",
+    "mysql",
+    "server"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+

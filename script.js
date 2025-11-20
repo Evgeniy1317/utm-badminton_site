@@ -492,41 +492,152 @@ document.addEventListener('keydown', function(e) {
             submitBtn.disabled = true;
             
             // Подготавливаем данные для отправки
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('phone', phone);
-            formData.append('email', email);
-            formData.append('level', level);
-            formData.append('hall', hall);
-            formData.append('day', day);
-            formData.append('message', message);
+            const formData = {
+                name: name,
+                phone: phone,
+                email: email || '',
+                level: level,
+                hall: hall,
+                day: day,
+                message: message || ''
+            };
             
-            // Для GitHub Pages используем встроенную обработку Netlify
-            // или показываем контактную информацию
-            console.log('Данные формы:', {
-                name, phone, email, level, hall, day, message
-            });
-            
-            // Показываем сообщение об успехе
-            bookingForm.style.display = 'none';
-            successMessage.classList.add('show');
-            
-            // Прокручиваем к сообщению об успехе
-            successMessage.scrollIntoView({ behavior: 'smooth' });
-            
-            // Показываем контактную информацию для связи
-            setTimeout(() => {
-                const contactInfo = `
+            // Проверка: если сайт открыт через file://, показываем сообщение без сохранения в БД
+            if (window.location.protocol === 'file:') {
+                // Показываем сообщение об успехе (но данные не сохранятся в БД)
+                bookingForm.style.display = 'none';
+                successMessage.textContent = 'Спасибо за заявку! Для сохранения данных в базу откройте сайт через http://localhost:3000/index.html';
+                successMessage.classList.add('show');
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Показываем контактную информацию
+                setTimeout(() => {
+                    const contactInfo = `
 📞 Спасибо за заявку! Свяжитесь с нами для подтверждения:
 
 📧 Email: evgenijurin998@gmail.com
 📱 Телефон: +373 XX XXX XXX
-💬 Telegram: @your_telegram
 
-Мы свяжемся с вами в ближайшее время!
-                `;
-                alert(contactInfo);
-            }, 2000);
+⚠️ Внимание: Данные не сохранены в базу данных.
+Для полной функциональности откройте сайт через:
+http://localhost:3000/index.html
+                    `;
+                    alert(contactInfo);
+                    
+                    // Восстанавливаем форму через 5 секунд
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        bookingForm.style.display = 'block';
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 5000);
+                }, 1000);
+                return;
+            }
+            
+            // Определяем URL API в зависимости от окружения
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1';
+            
+            // Для GitHub Pages используйте один из вариантов:
+            // 1. Formspree: https://formspree.io/f/YOUR_FORM_ID (замените YOUR_FORM_ID)
+            // 2. Ваш API: https://your-api.vercel.app/api/submit_booking
+            // 3. Или другой сервис
+            const apiUrl = isLocalhost 
+                ? '/api/submit_booking'  // Локальный сервер
+                : 'https://formspree.io/f/YOUR_FORM_ID'; // ЗАМЕНИТЕ НА ВАШ ENDPOINT
+            
+            const isFormspree = apiUrl.includes('formspree.io');
+            
+            // Формируем данные в зависимости от сервиса
+            let requestBody;
+            let requestHeaders;
+            
+            if (isFormspree) {
+                // Formspree требует FormData или application/x-www-form-urlencoded
+                requestBody = new URLSearchParams({
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email || '',
+                    level: formData.level,
+                    hall: formData.hall,
+                    day: formData.day,
+                    message: formData.message || '',
+                    _subject: 'Новая заявка на тренировку - Badminton Club'
+                });
+                requestHeaders = {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                };
+            } else {
+                // Наш API использует JSON
+                requestBody = JSON.stringify(formData);
+                requestHeaders = {
+                    'Content-Type': 'application/json',
+                };
+            }
+            
+            // Отправка данных на сервер
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: requestHeaders,
+                body: requestBody
+            })
+            .then(response => {
+                // Formspree возвращает 200 даже при ошибках, проверяем ok
+                if (!response.ok && !isFormspree) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Formspree возвращает { ok: true } при успехе
+                const isSuccess = isFormspree ? (data.ok === true || data.next) : data.success;
+                
+                if (isSuccess) {
+                    // Показываем сообщение об успехе
+                    bookingForm.style.display = 'none';
+                    successMessage.textContent = isFormspree 
+                        ? 'Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.'
+                        : data.message;
+                    successMessage.classList.add('show');
+                    
+                    // Прокручиваем к сообщению об успехе
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Очищаем форму
+                    bookingForm.reset();
+                    
+                    // Скрываем сообщение через 5 секунд и показываем форму снова
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        bookingForm.style.display = 'block';
+                    }, 5000);
+                } else {
+                    // Показываем ошибки валидации с сервера
+                    if (data.errors) {
+                        Object.keys(data.errors).forEach(field => {
+                            showError(field, data.errors[field]);
+                        });
+                    } else {
+                        alert('Ошибка: ' + (data.message || 'Не удалось отправить заявку'));
+                    }
+                    
+                    // Восстанавливаем кнопку
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                const errorMessage = isLocalhost
+                    ? 'Произошла ошибка при отправке формы. Убедитесь, что сервер запущен (node server.js)'
+                    : 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами напрямую.';
+                alert(errorMessage);
+                
+                // Восстанавливаем кнопку
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         } else {
             // Прокручиваем к первой ошибке
             const firstError = document.querySelector('.error');
@@ -2144,4 +2255,218 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Сортировка таблицы рейтинга
+    const ratingTable = document.querySelector('.rating-table');
+    if (ratingTable) {
+        const tbody = ratingTable.querySelector('tbody');
+        const sortableHeaders = ratingTable.querySelectorAll('th.points-col, th.matches-col, th.wins-col, th.winrate-col, th.trend-col');
+        
+        let currentSort = {
+            column: null,
+            direction: 'asc'
+        };
+
+        function parseValue(cell) {
+            const text = cell.textContent.trim();
+            // Для процентов убираем символ %
+            if (text.includes('%')) {
+                return parseFloat(text.replace('%', ''));
+            }
+            // Для тренда извлекаем число (может быть +15, -3 и т.д.)
+            if (text.includes('↗') || text.includes('↘') || text.includes('→')) {
+                const match = text.match(/[+-]?\d+/);
+                return match ? parseFloat(match[0]) : 0;
+            }
+            // Для чисел
+            const num = parseFloat(text);
+            return isNaN(num) ? 0 : num;
+        }
+
+        function getColumnType(columnIndex) {
+            const header = ratingTable.querySelectorAll('thead th')[columnIndex];
+            if (!header) return 'insertion';
+            
+            const className = header.className;
+            if (className.includes('winrate-col')) return 'merge';
+            if (className.includes('trend-col')) return 'counting';
+            if (className.includes('points-col') || className.includes('matches-col') || className.includes('wins-col')) {
+                return 'insertion';
+            }
+            return 'insertion';
+        }
+
+        // Insertion Sort для Очков, Матчей, Побед
+        function insertionSort(rows, columnIndex, direction) {
+            for (let i = 1; i < rows.length; i++) {
+                const keyRow = rows[i];
+                const keyValue = parseValue(keyRow.cells[columnIndex]);
+                let j = i - 1;
+                
+                while (j >= 0) {
+                    const compareValue = parseValue(rows[j].cells[columnIndex]);
+                    const shouldSwap = direction === 'asc' 
+                        ? compareValue < keyValue 
+                        : compareValue > keyValue;
+                    
+                    if (shouldSwap) {
+                        rows[j + 1] = rows[j];
+                        j--;
+                    } else {
+                        break;
+                    }
+                }
+                rows[j + 1] = keyRow;
+            }
+            return rows;
+        }
+
+        // Merge Sort для % побед
+        function mergeSort(rows, columnIndex, direction) {
+            if (rows.length <= 1) {
+                return rows;
+            }
+
+            const mid = Math.floor(rows.length / 2);
+            const left = mergeSort(rows.slice(0, mid), columnIndex, direction);
+            const right = mergeSort(rows.slice(mid), columnIndex, direction);
+
+            return merge(left, right, columnIndex, direction);
+        }
+
+        function merge(left, right, columnIndex, direction) {
+            const result = [];
+            let leftIndex = 0;
+            let rightIndex = 0;
+
+            while (leftIndex < left.length && rightIndex < right.length) {
+                const leftValue = parseValue(left[leftIndex].cells[columnIndex]);
+                const rightValue = parseValue(right[rightIndex].cells[columnIndex]);
+                
+                const shouldTakeLeft = direction === 'asc' 
+                    ? leftValue >= rightValue 
+                    : leftValue <= rightValue;
+
+                if (shouldTakeLeft) {
+                    result.push(left[leftIndex]);
+                    leftIndex++;
+                } else {
+                    result.push(right[rightIndex]);
+                    rightIndex++;
+                }
+            }
+
+            return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+        }
+
+        // Counting Sort для Тренд
+        function countingSort(rows, columnIndex, direction) {
+            // Находим минимальное и максимальное значение
+            let min = Infinity;
+            let max = -Infinity;
+            
+            rows.forEach(row => {
+                const value = parseValue(row.cells[columnIndex]);
+                if (value < min) min = value;
+                if (value > max) max = value;
+            });
+
+            // Создаем массив для подсчета
+            const range = max - min + 1;
+            const count = new Array(range).fill(0);
+            
+            // Подсчитываем частоту каждого значения
+            rows.forEach(row => {
+                const value = parseValue(row.cells[columnIndex]);
+                count[value - min]++;
+            });
+
+            // Создаем массив строк, сгруппированных по значениям
+            const buckets = new Array(range).fill(null).map(() => []);
+            rows.forEach(row => {
+                const value = parseValue(row.cells[columnIndex]);
+                buckets[value - min].push(row);
+            });
+
+            // Собираем результат
+            const result = [];
+            if (direction === 'asc') {
+                // По убыванию (больше = выше)
+                for (let i = buckets.length - 1; i >= 0; i--) {
+                    result.push(...buckets[i]);
+                }
+            } else {
+                // По возрастанию (меньше = выше)
+                for (let i = 0; i < buckets.length; i++) {
+                    result.push(...buckets[i]);
+                }
+            }
+
+            return result;
+        }
+
+        function sortTable(columnIndex, direction) {
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const columnType = getColumnType(columnIndex);
+            
+            let sortedRows;
+            
+            switch (columnType) {
+                case 'merge':
+                    sortedRows = mergeSort(rows, columnIndex, direction);
+                    break;
+                case 'counting':
+                    sortedRows = countingSort(rows, columnIndex, direction);
+                    break;
+                case 'insertion':
+                default:
+                    sortedRows = insertionSort(rows, columnIndex, direction);
+                    break;
+            }
+
+            // Удаляем все строки
+            rows.forEach(row => tbody.removeChild(row));
+            
+            // Добавляем отсортированные строки
+            sortedRows.forEach(row => tbody.appendChild(row));
+            
+            // Обновляем ранги
+            const updatedRows = tbody.querySelectorAll('tr');
+            updatedRows.forEach((row, index) => {
+                const rankCell = row.querySelector('.rank');
+                if (rankCell) {
+                    rankCell.textContent = index + 1;
+                }
+            });
+        }
+
+        sortableHeaders.forEach((header, index) => {
+            // Получаем реальный индекс колонки
+            const columnIndex = Array.from(header.parentElement.children).indexOf(header);
+            
+            header.addEventListener('click', function() {
+                // Убираем классы сортировки со всех заголовков
+                sortableHeaders.forEach(h => {
+                    h.classList.remove('sort-asc', 'sort-desc');
+                });
+
+                // Определяем направление сортировки
+                if (currentSort.column === columnIndex) {
+                    // Если кликнули по той же колонке, меняем направление
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    // Если кликнули по другой колонке, сортируем по убыванию
+                    currentSort.column = columnIndex;
+                    currentSort.direction = 'asc';
+                }
+
+                // Добавляем класс для визуального индикатора
+                header.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+
+                // Сортируем таблицу
+                sortTable(columnIndex, currentSort.direction);
+            });
+        });
+    }
 });
+

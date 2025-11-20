@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр записей - Badminton Club</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+            color: #212529;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        h1 {
+            color: #212529;
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th {
+            background: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 16px 12px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+            white-space: nowrap;
+        }
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+            color: #495057;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status.confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .level {
+            padding: 4px 10px;
+            background: #e7f3ff;
+            color: #004085;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .actions-cell {
+            display: flex;
+            gap: 6px;
+        }
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        .no-data h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        .message {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Записи на тренировки</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="loadBookings()">🔄 Обновить</button>
+                <button class="btn btn-danger" onclick="confirmDeleteAll()">🗑️ Очистить весь список</button>
+            </div>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div id="stats" class="stats"></div>
+        <div id="bookingsTable" class="table-container"></div>
+    </div>
+
+    <script>
+        async function loadBookings() {
+            const statsDiv = document.getElementById('stats');
+            const tableDiv = document.getElementById('bookingsTable');
+            
+            tableDiv.innerHTML = '<div class="loading">Загрузка...</div>';
+            
+            try {
+                const response = await fetch('/api/get_bookings');
+                const data = await response.json();
+                
+                if (data.success && data.bookings) {
+                    const bookings = data.bookings;
+                    
+                    // Статистика
+                    const stats = {
+                        total: bookings.length,
+                        pending: bookings.filter(b => b.status === 'pending').length,
+                        confirmed: bookings.filter(b => b.status === 'confirmed').length,
+                        cancelled: bookings.filter(b => b.status === 'cancelled').length
+                    };
+                    
+                    statsDiv.innerHTML = `
+                        <div class="stat-card">
+                            <h3>Всего записей</h3>
+                            <div class="number">${stats.total}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Ожидают</h3>
+                            <div class="number">${stats.pending}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Подтверждены</h3>
+                            <div class="number">${stats.confirmed}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Отменены</h3>
+                            <div class="number">${stats.cancelled}</div>
+                        </div>
+                    `;
+                    
+                    // Таблица
+                    if (bookings.length === 0) {
+                        tableDiv.innerHTML = '<div class="no-data"><h3>Записей пока нет</h3><p>Новые заявки появятся здесь</p></div>';
+                    } else {
+                        const statusNames = {
+                            'pending': 'Ожидает',
+                            'confirmed': 'Подтверждена',
+                            'cancelled': 'Отменена'
+                        };
+                        
+                        let tableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Имя</th>
+                                        <th>Телефон</th>
+                                        <th>Email</th>
+                                        <th>Уровень</th>
+                                        <th>Зал</th>
+                                        <th>День</th>
+                                        <th>Статус</th>
+                                        <th>Дата создания</th>
+                                        <th>Сообщение</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        
+                        bookings.forEach(booking => {
+                            const date = new Date(booking.created_at);
+                            const dateStr = date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+                            
+                            tableHTML += `
+                                <tr>
+                                    <td>${booking.id}</td>
+                                    <td><strong>${escapeHtml(booking.name)}</strong></td>
+                                    <td>${escapeHtml(booking.phone)}</td>
+                                    <td>${booking.email ? escapeHtml(booking.email) : '-'}</td>
+                                    <td><span class="level">${booking.level}</span></td>
+                                    <td>${booking.hall}</td>
+                                    <td>${booking.day}</td>
+                                    <td><span class="status ${booking.status}">${statusNames[booking.status] || booking.status}</span></td>
+                                    <td>${dateStr}</td>
+                                    <td>${booking.message ? escapeHtml(booking.message.substring(0, 50)) + (booking.message.length > 50 ? '...' : '') : '-'}</td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            ${booking.status !== 'confirmed' ? `<button class="btn btn-success btn-sm" onclick="updateStatus(${booking.id}, 'confirmed')">✓ Подтвердить</button>` : ''}
+                                            ${booking.status !== 'cancelled' ? `<button class="btn btn-warning btn-sm" onclick="updateStatus(${booking.id}, 'cancelled')">✗ Отменить</button>` : ''}
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        
+                        tableHTML += '</tbody></table>';
+                        tableDiv.innerHTML = tableHTML;
+                    }
+                } else {
+                    tableDiv.innerHTML = '<div class="no-data"><h3>Ошибка загрузки данных</h3></div>';
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                tableDiv.innerHTML = '<div class="no-data"><h3>Ошибка подключения к серверу</h3></div>';
+            }
+        }
+        
+        async function updateStatus(id, status) {
+            if (!confirm(`Вы уверены, что хотите изменить статус записи #${id}?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/update_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id, status })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Статус успешно обновлен', 'success');
+                    loadBookings();
+                } else {
+                    showMessage('Ошибка при обновлении статуса', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showMessage('Ошибка подключения к серверу', 'error');
+            }
+        }
+        
+        function confirmDeleteAll() {
+            if (!confirm('⚠️ ВНИМАНИЕ!\n\nВы уверены, что хотите удалить ВСЕ записи?\n\nЭто действие нельзя отменить!')) {
+                return;
+            }
+            
+            if (!confirm('Последнее предупреждение!\n\nВсе записи будут безвозвратно удалены.\n\nПродолжить?')) {
+                return;
+            }
+            
+            deleteAllBookings();
+        }
+        
+        async function deleteAllBookings() {
+            try {
+                const response = await fetch('/api/delete_all', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Все записи успешно удалены', 'success');
+                    loadBookings();
+                } else {
+                    showMessage('Ошибка при удалении записей', 'error');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showMessage('Ошибка подключения к серверу', 'error');
+            }
+        }
+        
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type} show`;
+            
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 3000);
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Загружаем данные при загрузке страницы
+        loadBookings();
+        
+        // Автообновление каждые 10 секунд
+        setInterval(loadBookings, 10000);
+    </script>
+</body>
+</html>
