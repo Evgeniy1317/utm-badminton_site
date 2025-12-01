@@ -32,17 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Закрытие меню при клике на ссылку
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
             const targetSection = this.getAttribute('data-section');
-            const targetElement = document.getElementById(targetSection);
             
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            // Внутренние ссылки (скролл по странице)
+            if (targetSection) {
+                e.preventDefault();
+                
+                const targetElement = document.getElementById(targetSection);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
+            // Внешние ссылки (Турниры, Рейтинг, Галерея, История и др.) будут
+            // работать по умолчанию через href, просто закрываем меню
             
             closeMobileMenu();
         });
