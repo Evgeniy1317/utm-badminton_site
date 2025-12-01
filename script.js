@@ -123,7 +123,6 @@ const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 function toggleMobileMenu() {
     mobileMenu.classList.toggle('active');
     mobileMenuToggle.classList.toggle('active');
-    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
 }
 
 // Функция закрытия меню
@@ -351,6 +350,13 @@ document.addEventListener('keydown', function(e) {
     // Обработка клика по логотипу
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            // Если ссылка ведет на другую страницу, не предотвращаем стандартное поведение
+            if (href && href.includes('index.html')) {
+                // Это переход на другую страницу, разрешаем стандартное поведение
+                return;
+            }
+            // Если это якорь на той же странице, прокручиваем
             e.preventDefault();
             window.scrollTo({
                 top: 0,
@@ -358,6 +364,33 @@ document.addEventListener('keydown', function(e) {
             });
         });
     }
+    
+    // Обработка якорей при загрузке страницы (для переходов с других страниц)
+    function handleAnchorOnLoad() {
+        if (window.location.hash) {
+            const hash = window.location.hash;
+            const targetSection = document.querySelector(hash);
+            
+            if (targetSection) {
+                // Небольшая задержка для полной загрузки страницы
+                setTimeout(() => {
+                    const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+        }
+    }
+    
+    // Вызываем обработку якорей при загрузке
+    handleAnchorOnLoad();
+    
+    // Также обрабатываем изменение hash (если пользователь кликает на якорь после загрузки)
+    window.addEventListener('hashchange', handleAnchorOnLoad);
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -424,9 +457,13 @@ document.addEventListener('keydown', function(e) {
         const field = document.getElementById(fieldId);
         const errorElement = document.getElementById(fieldId + 'Error');
         
-        field.classList.add('error');
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
+        if (field) {
+            field.classList.add('error');
+        }
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
     }
 
     // Функция скрытия ошибки
@@ -434,8 +471,12 @@ document.addEventListener('keydown', function(e) {
         const field = document.getElementById(fieldId);
         const errorElement = document.getElementById(fieldId + 'Error');
         
-        field.classList.remove('error');
-        errorElement.classList.remove('show');
+        if (field) {
+            field.classList.remove('error');
+        }
+        if (errorElement) {
+            errorElement.classList.remove('show');
+        }
     }
 
     // Обработка отправки формы
@@ -847,14 +888,54 @@ http://localhost:3000/index.html
     const langTrigger = document.getElementById('langTrigger');
     const langDropdown = document.getElementById('langDropdown');
     const langOptions = document.querySelectorAll('.lang-option');
+    const pageLangTrigger = document.querySelector('.page-lang-trigger');
+    const pageLangDropdown = document.querySelector('.page-lang-dropdown');
+    const pageLangOptions = document.querySelectorAll('.page-lang-option');
+    const pageLangLabel = document.querySelector('.page-lang-label');
     const currentLang = localStorage.getItem('selectedLanguage') || 'ru';
     
     // Устанавливаем активный язык при загрузке
     setActiveLanguage(currentLang);
+    updatePageLanguageUI(currentLang);
+    
+    function adjustLanguageDropdownPosition() {
+        if (!langDropdown || !langTrigger) return;
+        
+        // Снимаем предыдущие классы позиционирования
+        langDropdown.classList.remove('dropdown-below');
+        
+        // Временно показываем dropdown, чтобы измерить высоту
+        const prevVisibility = langDropdown.style.visibility;
+        const prevDisplay = langDropdown.style.display;
+        const prevOpacity = langDropdown.style.opacity;
+        const wasHidden = getComputedStyle(langDropdown).visibility === 'hidden';
+        
+        if (wasHidden) {
+            langDropdown.style.visibility = 'hidden';
+            langDropdown.style.display = 'block';
+            langDropdown.style.opacity = '0';
+        }
+        
+        const dropdownHeight = langDropdown.offsetHeight;
+        
+        if (wasHidden) {
+            langDropdown.style.visibility = prevVisibility;
+            langDropdown.style.display = prevDisplay;
+            langDropdown.style.opacity = prevOpacity;
+        }
+        
+        const triggerRect = langTrigger.getBoundingClientRect();
+        const spaceAbove = triggerRect.top;
+        
+        if (spaceAbove < dropdownHeight + 20) {
+            langDropdown.classList.add('dropdown-below');
+        }
+    }
     
     // Обработчик для открытия/закрытия выпадающего меню
     langTrigger.addEventListener('click', function(e) {
         e.stopPropagation();
+        adjustLanguageDropdownPosition();
         langDropdown.classList.toggle('show');
         langTrigger.classList.toggle('active');
     });
@@ -869,14 +950,7 @@ http://localhost:3000/index.html
             // Добавляем активный класс к выбранной опции
             this.classList.add('active');
             
-            // Сохраняем выбранный язык
-            localStorage.setItem('selectedLanguage', selectedLang);
-            
-            // Обновляем отображение (это скроет выбранный язык)
-            setActiveLanguage(selectedLang);
-            
-            // Переключаем язык
-            switchLanguage(selectedLang);
+            applyLanguage(selectedLang);
             
             // Закрываем выпадающее меню
             langDropdown.classList.remove('show');
@@ -884,13 +958,59 @@ http://localhost:3000/index.html
         });
     });
     
+    // Локальный переключатель языков на отдельных страницах
+    if (pageLangTrigger && pageLangDropdown) {
+        pageLangTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            pageLangDropdown.classList.toggle('show');
+            pageLangTrigger.classList.toggle('active');
+        });
+    }
+    
+    pageLangOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const selectedLang = this.dataset.lang;
+            
+            applyLanguage(selectedLang);
+            
+            if (langOptions.length) {
+                langOptions.forEach(opt => opt.classList.remove('active'));
+            }
+            
+            pageLangDropdown.classList.remove('show');
+            if (pageLangTrigger) {
+                pageLangTrigger.classList.remove('active');
+            }
+        });
+    });
+    
     // Закрытие выпадающего меню при клике вне его
     document.addEventListener('click', function(e) {
-        if (!langTrigger.contains(e.target) && !langDropdown.contains(e.target)) {
+        if (langTrigger && langDropdown && !langTrigger.contains(e.target) && !langDropdown.contains(e.target)) {
             langDropdown.classList.remove('show');
             langTrigger.classList.remove('active');
         }
+        
+        if (pageLangTrigger && pageLangDropdown && !pageLangTrigger.contains(e.target) && !pageLangDropdown.contains(e.target)) {
+            pageLangDropdown.classList.remove('show');
+            pageLangTrigger.classList.remove('active');
+        }
     });
+    
+    function updatePageLanguageUI(lang) {
+        if (!pageLangLabel) return;
+        pageLangLabel.textContent = lang.toUpperCase();
+        pageLangOptions.forEach(option => {
+            option.classList.toggle('active', option.dataset.lang === lang);
+        });
+    }
+    
+    function applyLanguage(lang) {
+        localStorage.setItem('selectedLanguage', lang);
+        setActiveLanguage(lang);
+        switchLanguage(lang);
+        updatePageLanguageUI(lang);
+    }
     
     // Функция установки активного языка
     function setActiveLanguage(lang) {
@@ -1531,19 +1651,34 @@ http://localhost:3000/index.html
         
         const currentTranslations = translations[lang];
         
+        const sectionSelector = (hash) => `a[href="${hash}"], a[href="index.html${hash}"]`;
+        const linkMatches = (href, options) => {
+            if (!href) return false;
+            const normalized = href.replace('index.html', '');
+            return options.includes(href) || options.includes(normalized);
+        };
+        
         // Обновляем навигацию
-        const aboutLink = document.querySelector('a[href="#about"]');
+        const aboutLink = document.querySelector(sectionSelector('#about'));
         if (aboutLink) aboutLink.innerHTML = currentTranslations['nav-about'];
-        const trainerLink = document.querySelector('a[href="#trainer"]');
+        const trainerLink = document.querySelector(sectionSelector('#trainer'));
         if (trainerLink) trainerLink.innerHTML = currentTranslations['nav-trainer'];
-        const hallsLink = document.querySelector('a[href="#halls"]');
+        const hallsLink = document.querySelector(sectionSelector('#halls'));
         if (hallsLink) hallsLink.innerHTML = currentTranslations['nav-halls'];
-        const scheduleLink = document.querySelector('a[href="#schedule"]');
+        const scheduleLink = document.querySelector(sectionSelector('#schedule'));
         if (scheduleLink) scheduleLink.innerHTML = currentTranslations['nav-schedule'];
-        const bookingLink = document.querySelector('a[href="#booking"]');
+        const bookingLink = document.querySelector(sectionSelector('#booking'));
         if (bookingLink) bookingLink.innerHTML = currentTranslations['nav-booking'];
-        const contactLink = document.querySelector('a[href="#contact"]');
+        const contactLink = document.querySelector(sectionSelector('#contact'));
         if (contactLink) contactLink.innerHTML = currentTranslations['nav-contact'];
+        const ratingLink = document.querySelector('a[href="#rating"], a[href="rating.html"]');
+        if (ratingLink) ratingLink.innerHTML = currentTranslations['nav-rating'];
+        const galleryLink = document.querySelector('a[href="#gallery"], a[href="gallery.html"]');
+        if (galleryLink) galleryLink.innerHTML = currentTranslations['nav-gallery'];
+        const historyLink = document.querySelector('a[href="#history"], a[href="history.html"]');
+        if (historyLink) historyLink.innerHTML = currentTranslations['nav-history'];
+        const faqLink = document.querySelector(sectionSelector('#faq'));
+        if (faqLink) faqLink.textContent = currentTranslations['nav-faq'];
         
         // Обновляем турниры с сохранением бейджа (если ссылка существует)
         const tournamentLink = document.querySelector('a[href="#tournaments"], a[href="tournaments.html"]');
@@ -1554,27 +1689,26 @@ http://localhost:3000/index.html
                 (badgeText ? `<span class="notification-badge" id="tournamentBadge">${badgeText}</span>` : '');
         }
         
-        // Обновляем FAQ в навигации
-        const faqLink = document.querySelector('a[href="#faq"]');
-        if (faqLink) faqLink.textContent = currentTranslations['nav-faq'];
-        
         // Обновляем мобильную навигацию
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
         mobileNavLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === '#about') link.innerHTML = currentTranslations['nav-about'];
-            if (href === '#trainer') link.innerHTML = currentTranslations['nav-trainer'];
-            if (href === '#halls') link.innerHTML = currentTranslations['nav-halls'];
-            if (href === '#schedule') link.innerHTML = currentTranslations['nav-schedule'];
-            if (href === '#booking') link.innerHTML = currentTranslations['nav-booking'];
-            if (href === '#contact') link.innerHTML = currentTranslations['nav-contact'];
-            if (href === '#faq') link.innerHTML = currentTranslations['nav-faq'];
+            const href = link.getAttribute('href') || '';
+            if (linkMatches(href, ['#about'])) link.innerHTML = currentTranslations['nav-about'];
+            if (linkMatches(href, ['#trainer'])) link.innerHTML = currentTranslations['nav-trainer'];
+            if (linkMatches(href, ['#halls'])) link.innerHTML = currentTranslations['nav-halls'];
+            if (linkMatches(href, ['#schedule'])) link.innerHTML = currentTranslations['nav-schedule'];
+            if (linkMatches(href, ['#booking'])) link.innerHTML = currentTranslations['nav-booking'];
+            if (linkMatches(href, ['#contact'])) link.innerHTML = currentTranslations['nav-contact'];
+            if (linkMatches(href, ['#faq'])) link.innerHTML = currentTranslations['nav-faq'];
             if (href === '#tournaments' || href === 'tournaments.html') {
                 const badge = link.querySelector('.notification-badge');
                 const badgeText = badge ? badge.textContent : '';
                 link.innerHTML = currentTranslations['nav-tournaments'] + 
                     (badgeText ? `<span class="notification-badge mobile-notification">${badgeText}</span>` : '');
             }
+            if (href === 'rating.html' || href === '#rating') link.innerHTML = currentTranslations['nav-rating'];
+            if (href === 'gallery.html' || href === '#gallery') link.innerHTML = currentTranslations['nav-gallery'];
+            if (href === 'history.html' || href === '#history') link.innerHTML = currentTranslations['nav-history'];
         });
         
         // Обновляем hero секцию
@@ -1710,7 +1844,6 @@ http://localhost:3000/index.html
             
             const dayOptions = bookingSection.querySelectorAll('#day option');
             const dayNames = [currentTranslations['monday'], currentTranslations['tuesday'], currentTranslations['wednesday'], 
-                            currentTranslations['thursday'], currentTranslations['friday'], 
                             currentTranslations['saturday'], currentTranslations['sunday']];
             dayOptions.forEach((option, index) => {
                 if (dayNames[index]) option.textContent = dayNames[index];
@@ -1890,18 +2023,18 @@ http://localhost:3000/index.html
         // Обновляем навигацию в футере
         const footerNavLinks = document.querySelectorAll('.footer-nav a');
         footerNavLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === '#about') link.textContent = currentTranslations['nav-about'];
-            if (href === '#trainer') link.textContent = currentTranslations['nav-trainer'];
-            if (href === '#halls') link.textContent = currentTranslations['nav-halls'];
-            if (href === '#schedule') link.textContent = currentTranslations['nav-schedule'];
-            if (href === '#booking') link.textContent = currentTranslations['nav-booking'];
-            if (href === '#contact') link.textContent = currentTranslations['nav-contact'];
-            if (href === '#faq') link.textContent = currentTranslations['nav-faq'];
-            if (href === 'tournaments.html' || href === '#tournaments') link.textContent = currentTranslations['nav-tournaments'];
-            if (href === 'rating.html' || href === '#rating') link.textContent = currentTranslations['nav-rating'];
-            if (href === 'gallery.html' || href === '#gallery') link.textContent = currentTranslations['nav-gallery'];
-            if (href === 'history.html' || href === '#history') link.textContent = currentTranslations['nav-history'];
+            const href = link.getAttribute('href') || '';
+            if (linkMatches(href, ['#about'])) link.textContent = currentTranslations['nav-about'];
+            if (linkMatches(href, ['#trainer'])) link.textContent = currentTranslations['nav-trainer'];
+            if (linkMatches(href, ['#halls'])) link.textContent = currentTranslations['nav-halls'];
+            if (linkMatches(href, ['#schedule'])) link.textContent = currentTranslations['nav-schedule'];
+            if (linkMatches(href, ['#booking'])) link.textContent = currentTranslations['nav-booking'];
+            if (linkMatches(href, ['#contact'])) link.textContent = currentTranslations['nav-contact'];
+            if (linkMatches(href, ['#faq'])) link.textContent = currentTranslations['nav-faq'];
+            if (href === 'tournaments.html' || linkMatches(href, ['#tournaments'])) link.textContent = currentTranslations['nav-tournaments'];
+            if (href === 'rating.html' || linkMatches(href, ['#rating'])) link.textContent = currentTranslations['nav-rating'];
+            if (href === 'gallery.html' || linkMatches(href, ['#gallery'])) link.textContent = currentTranslations['nav-gallery'];
+            if (href === 'history.html' || linkMatches(href, ['#history'])) link.textContent = currentTranslations['nav-history'];
         });
         
         // Обновляем FAQ секцию
@@ -2101,8 +2234,290 @@ http://localhost:3000/index.html
     // Инициализация темы
     initializeTheme();
 
+    // Инициализация блоков категорий турнира (до 3 категорий)
+    initializeTournamentCategoryBlocks();
+    
+    // Обработчик формы регистрации на турнир
+    const tournamentForm = document.getElementById('tournamentRegistrationForm');
+    
+    if (tournamentForm) {
+        tournamentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // Получаем значения полей
+            const name = document.getElementById('tournamentName').value.trim();
+            const categoryBlocks = Array.from(document.querySelectorAll('.category-block'));
+            const selectedCategories = categoryBlocks
+                .map(block => {
+                    const select = block.querySelector('select');
+                    const partnerCheckbox = block.querySelector('.partner-checkbox-label input[type="checkbox"]');
+                    const partnerNameInput = block.querySelector('.partner-name-group input');
+                    
+                    return {
+                        category: select ? select.value : '',
+                        lookingForPartner: partnerCheckbox ? partnerCheckbox.checked : false,
+                        partnerName: partnerNameInput ? partnerNameInput.value.trim() : ''
+                    };
+                })
+                .filter(item => item.category);
+            
+            // Валидация имени
+            if (!name || name.length < 2) {
+                showError('tournamentName', 'Введите ваше имя и фамилию (минимум 2 символа)');
+                isValid = false;
+            } else {
+                hideError('tournamentName');
+            }
+            
+            const firstCategorySelect = document.getElementById('tournamentCategory1');
+            
+            // Валидация категории
+            if (selectedCategories.length === 0) {
+                if (firstCategorySelect) {
+                    firstCategorySelect.classList.add('field-error');
+                }
+                isValid = false;
+            } else {
+                if (firstCategorySelect) {
+                    firstCategorySelect.classList.remove('field-error');
+                }
+            }
+            
+            // Если форма валидна, отправляем данные
+            if (isValid) {
+                const submitBtn = tournamentForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+                
+                // Подготавливаем данные для отправки
+                const formData = {
+                    name: name,
+                    categories: selectedCategories
+                };
+                
+                // Проверка: если сайт открыт через file://, показываем сообщение
+                if (window.location.protocol === 'file:') {
+                    const successMessage = document.getElementById('tournamentSuccessMessage');
+                    tournamentForm.style.display = 'none';
+                    successMessage.textContent = 'Спасибо за регистрацию! Для сохранения данных откройте сайт через http://localhost:3000/tournaments.html';
+                    successMessage.style.display = 'block';
+                    successMessage.classList.add('show');
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    setTimeout(() => {
+                        alert('📞 Спасибо за регистрацию на турнир!\n\n⚠️ Для полной функциональности откройте сайт через:\nhttp://localhost:3000/tournaments.html');
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                            successMessage.style.display = 'none';
+                            tournamentForm.style.display = 'block';
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                            tournamentForm.reset();
+                        }, 5000);
+                    }, 1000);
+                    return;
+                }
+                
+                // Определяем URL API
+                const isLocalhost = window.location.hostname === 'localhost' || 
+                                   window.location.hostname === '127.0.0.1';
+                
+                const apiUrl = isLocalhost 
+                    ? '/api/submit_tournament_registration'
+                    : 'https://formspree.io/f/YOUR_FORM_ID'; // ЗАМЕНИТЕ НА ВАШ ENDPOINT
+                
+                const isFormspree = apiUrl.includes('formspree.io');
+                
+                // Формируем данные
+                let requestBody;
+                let requestHeaders;
+                
+                if (isFormspree) {
+                    const categoriesPayload = formData.categories
+                        .map((item, index) => {
+                            const label = `Категория ${index + 1}`;
+                            const partnerInfo = item.lookingForPartner
+                                ? 'ищу партнера'
+                                : (item.partnerName ? `с партнером: ${item.partnerName}` : 'одиночно');
+                            return `${label}: ${item.category || 'не выбрана'} (${partnerInfo})`;
+                        })
+                        .join('; ');
+                    
+                    requestBody = new URLSearchParams({
+                        name: formData.name,
+                        categories: categoriesPayload,
+                        _subject: 'Регистрация на турнир - Badminton Club'
+                    });
+                    requestHeaders = {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    };
+                } else {
+                    requestBody = JSON.stringify(formData);
+                    requestHeaders = {
+                        'Content-Type': 'application/json',
+                    };
+                }
+                
+                // Отправка данных на сервер
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: requestHeaders,
+                    body: requestBody
+                })
+                .then(response => {
+                    if (isFormspree) {
+                        return response.json();
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success || data.ok) {
+                        const successMessage = document.getElementById('tournamentSuccessMessage');
+                        if (successMessage) {
+                            successMessage.textContent = 'Спасибо за регистрацию на турнир! Мы свяжемся с вами в ближайшее время.';
+                            successMessage.style.display = 'block';
+                            successMessage.classList.add('show');
+                            successMessage.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        
+                        // Сбрасываем форму
+                        tournamentForm.reset();
+                        initializeTournamentCategoryBlocks();
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        if (window.location.search) {
+                            history.replaceState(null, '', window.location.pathname);
+                        }
+                        
+                        setTimeout(() => {
+                            if (successMessage) {
+                                successMessage.classList.remove('show');
+                                successMessage.style.display = 'none';
+                            }
+                        }, 4000);
+                    } else {
+                        alert('Ошибка: ' + (data.message || 'Не удалось отправить регистрацию'));
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    const errorMessage = isLocalhost
+                        ? 'Произошла ошибка при отправке формы. Убедитесь, что сервер запущен (node server.js)'
+                        : 'Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или свяжитесь с нами напрямую.';
+                    alert(errorMessage);
+                    
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+            } else {
+                // Прокручиваем к первой ошибке
+                const firstError = document.querySelector('.error-message.show');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    }
+
+    prefillTournamentFormFromQuery();
+
     console.log('UTM Badminton Club - сайт загружен успешно! 🏸');
 });
+
+function initializeTournamentCategoryBlocks() {
+    const categoryBlocks = document.querySelectorAll('.category-block');
+    if (!categoryBlocks.length) {
+        return;
+    }
+    
+    categoryBlocks.forEach(block => {
+        const partnerCheckbox = block.querySelector('.partner-checkbox-label input[type="checkbox"]');
+        const partnerNameGroup = block.querySelector('.partner-name-group');
+        const partnerNameInput = partnerNameGroup ? partnerNameGroup.querySelector('input') : null;
+        
+        if (!partnerCheckbox || !partnerNameGroup || !partnerNameInput) {
+            return;
+        }
+        
+        const updateVisibility = () => {
+            if (partnerCheckbox.checked) {
+                partnerNameGroup.style.display = 'none';
+                partnerNameInput.value = '';
+            } else {
+                partnerNameGroup.style.display = '';
+            }
+        };
+        
+        if (!partnerCheckbox.dataset.partnerHandlerAttached) {
+            partnerCheckbox.addEventListener('change', updateVisibility);
+            partnerCheckbox.dataset.partnerHandlerAttached = 'true';
+        }
+        
+        updateVisibility();
+    });
+}
+
+function prefillTournamentFormFromQuery() {
+    const tournamentForm = document.getElementById('tournamentRegistrationForm');
+    if (!tournamentForm) return;
+    
+    const params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+    
+    let hasPrefill = false;
+    
+    const nameParam = params.get('name');
+    if (nameParam) {
+        const nameInput = document.getElementById('tournamentName');
+        if (nameInput) {
+            nameInput.value = decodeURIComponent(nameParam.replace(/\+/g, ' '));
+            hasPrefill = true;
+        }
+    }
+    
+    ['1', '2', '3'].forEach(index => {
+        const categoryValue = params.get(`category${index}`);
+        const select = document.getElementById(`tournamentCategory${index}`);
+        if (select && categoryValue) {
+            const optionExists = Array.from(select.options).some(opt => opt.value === categoryValue);
+            if (optionExists) {
+                select.value = categoryValue;
+                hasPrefill = true;
+            }
+        }
+        
+        const partnerCheckbox = document.getElementById(`lookingForPartner${index}`);
+        const partnerCheckboxParam = params.get(`lookingForPartner${index}`);
+        if (partnerCheckbox && partnerCheckboxParam !== null) {
+            partnerCheckbox.checked = partnerCheckboxParam === 'on' || partnerCheckboxParam === 'true' || partnerCheckboxParam === '1' || partnerCheckboxParam === 'yes';
+            hasPrefill = true;
+        }
+        
+        const partnerNameInput = document.getElementById(`partnerName${index}`);
+        const partnerNameParam = params.get(`partnerName${index}`);
+        if (partnerNameInput && partnerNameParam) {
+            partnerNameInput.value = decodeURIComponent(partnerNameParam.replace(/\+/g, ' '));
+            hasPrefill = true;
+        }
+    });
+    
+    if (!hasPrefill) return;
+    
+    initializeTournamentCategoryBlocks();
+    
+    const autoSubmit = params.get('autoSubmit');
+    if (autoSubmit !== '0') {
+        setTimeout(() => {
+            tournamentForm.dispatchEvent(new Event('submit', { cancelable: true }));
+        }, 300);
+        history.replaceState(null, '', window.location.pathname);
+    }
+}
 
 // Функция инициализации темы
 function initializeTheme() {

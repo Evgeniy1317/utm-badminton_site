@@ -7,17 +7,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=68">
+  <link rel="stylesheet" href="css/style.css?v=97">
   <link rel="stylesheet" href="css/mobile.css?v=1">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏸</text></svg>">
 </head>
-<body>
+<body data-page="tournaments">
 
   <!-- Шапка сайта -->
   <header class="header">
     <div class="container">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index.html#about" class="logo-link">
           <img src="css/img/photo_5193023805335929580_y-removebg-preview.png" alt="DTM Logo" class="utm-logo-img">
         </a>
         <h1 class="logo-text">Badminton Club</h1>
@@ -144,6 +144,20 @@
     </div>
   </div>
 
+  <div class="page-lang-switcher">
+    <button class="page-lang-trigger" aria-label="Выбрать язык">
+      <span class="page-lang-label">RU</span>
+      <svg class="page-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6,9 12,15 18,9"></polyline>
+      </svg>
+    </button>
+    <div class="page-lang-dropdown">
+      <button class="page-lang-option active" data-lang="ru">Русский</button>
+      <button class="page-lang-option" data-lang="ro">Română</button>
+      <button class="page-lang-option" data-lang="en">English</button>
+    </div>
+  </div>
+
   <!-- Турниры -->
   <section id="tournaments" class="tournaments">
     <div class="container">
@@ -169,6 +183,179 @@
     </div>
   </section>
 
+  <!-- Форма регистрации на турнир -->
+  <section id="tournament-registration" class="tournament-registration">
+    <div class="container">
+      <h2 class="section-title">Регистрация на турнир</h2>
+      <p class="section-subtitle">Заполните форму, чтобы заявить о своем участии в предстоящем турнире</p>
+      
+      <div class="tournament-form-wrapper">
+        <div class="success-message" id="tournamentSuccessMessage" style="display: none;"></div>
+        <form id="tournamentRegistrationForm" class="tournament-form">
+          <div class="form-group">
+            <label for="tournamentName">Имя и фамилия *</label>
+            <input type="text" id="tournamentName" name="name" required placeholder="Введите ваше имя и фамилию">
+          </div>
+
+          <!-- Первая категория -->
+          <div class="category-block">
+            <div class="form-group category-group">
+              <label for="tournamentCategory1">Категория 1</label>
+              <select id="tournamentCategory1" name="category1">
+                <option value="">Выберите категорию</option>
+                <optgroup label="Open">
+                  <option value="ms-open">MS OPEN</option>
+                  <option value="ws-open">WS OPEN</option>
+                  <option value="md-open">MD OPEN</option>
+                  <option value="wd-open">WD OPEN</option>
+                  <option value="xd-open">XD OPEN</option>
+                </optgroup>
+                <optgroup label="Категория A">
+                  <option value="ms-a">MS A</option>
+                  <option value="ws-a">WS A</option>
+                  <option value="md-a">MD A</option>
+                  <option value="wd-a">WD A</option>
+                  <option value="xd-a">XD A</option>
+                </optgroup>
+                <optgroup label="Категория B">
+                  <option value="ms-b">MS B</option>
+                  <option value="ws-b">WS B</option>
+                  <option value="md-b">MD B</option>
+                  <option value="wd-b">WD B</option>
+                  <option value="xd-b">XD B</option>
+                </optgroup>
+                <optgroup label="Категория C">
+                  <option value="ms-c">MS C</option>
+                  <option value="ws-c">WS C</option>
+                  <option value="md-c">MD C</option>
+                  <option value="wd-c">WD C</option>
+                  <option value="xd-c">XD C</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group partner-checkbox-group">
+              <label class="partner-checkbox-label">
+                <input type="checkbox" id="lookingForPartner1" name="lookingForPartner1">
+                <span class="partner-checkbox-custom"></span>
+                <span class="partner-checkbox-text">Ищу партнера</span>
+              </label>
+            </div>
+
+            <div class="form-group partner-name-group">
+              <label for="partnerName1">Имя партнера</label>
+              <input type="text" id="partnerName1" name="partnerName1" placeholder="Введите имя и фамилию партнера">
+            </div>
+          </div>
+
+          <!-- Вторая категория -->
+          <div class="category-block">
+            <div class="form-group category-group">
+              <label for="tournamentCategory2">Категория 2</label>
+              <select id="tournamentCategory2" name="category2">
+                <option value="">Выберите категорию</option>
+                <optgroup label="Open">
+                  <option value="ms-open">MS OPEN</option>
+                  <option value="ws-open">WS OPEN</option>
+                  <option value="md-open">MD OPEN</option>
+                  <option value="wd-open">WD OPEN</option>
+                  <option value="xd-open">XD OPEN</option>
+                </optgroup>
+                <optgroup label="Категория A">
+                  <option value="ms-a">MS A</option>
+                  <option value="ws-a">WS A</option>
+                  <option value="md-a">MD A</option>
+                  <option value="wd-a">WD A</option>
+                  <option value="xd-a">XD A</option>
+                </optgroup>
+                <optgroup label="Категория B">
+                  <option value="ms-b">MS B</option>
+                  <option value="ws-b">WS B</option>
+                  <option value="md-b">MD B</option>
+                  <option value="wd-b">WD B</option>
+                  <option value="xd-b">XD B</option>
+                </optgroup>
+                <optgroup label="Категория C">
+                  <option value="ms-c">MS C</option>
+                  <option value="ws-c">WS C</option>
+                  <option value="md-c">MD C</option>
+                  <option value="wd-c">WD C</option>
+                  <option value="xd-c">XD C</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group partner-checkbox-group">
+              <label class="partner-checkbox-label">
+                <input type="checkbox" id="lookingForPartner2" name="lookingForPartner2">
+                <span class="partner-checkbox-custom"></span>
+                <span class="partner-checkbox-text">Ищу партнера</span>
+              </label>
+            </div>
+
+            <div class="form-group partner-name-group">
+              <label for="partnerName2">Имя партнера</label>
+              <input type="text" id="partnerName2" name="partnerName2" placeholder="Введите имя и фамилию партнера">
+            </div>
+          </div>
+
+          <!-- Третья категория -->
+          <div class="category-block">
+            <div class="form-group category-group">
+              <label for="tournamentCategory3">Категория 3</label>
+              <select id="tournamentCategory3" name="category3">
+                <option value="">Выберите категорию</option>
+                <optgroup label="Open">
+                  <option value="ms-open">MS OPEN</option>
+                  <option value="ws-open">WS OPEN</option>
+                  <option value="md-open">MD OPEN</option>
+                  <option value="wd-open">WD OPEN</option>
+                  <option value="xd-open">XD OPEN</option>
+                </optgroup>
+                <optgroup label="Категория A">
+                  <option value="ms-a">MS A</option>
+                  <option value="ws-a">WS A</option>
+                  <option value="md-a">MD A</option>
+                  <option value="wd-a">WD A</option>
+                  <option value="xd-a">XD A</option>
+                </optgroup>
+                <optgroup label="Категория B">
+                  <option value="ms-b">MS B</option>
+                  <option value="ws-b">WS B</option>
+                  <option value="md-b">MD B</option>
+                  <option value="wd-b">WD B</option>
+                  <option value="xd-b">XD B</option>
+                </optgroup>
+                <optgroup label="Категория C">
+                  <option value="ms-c">MS C</option>
+                  <option value="ws-c">WS C</option>
+                  <option value="md-c">MD C</option>
+                  <option value="wd-c">WD C</option>
+                  <option value="xd-c">XD C</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group partner-checkbox-group">
+              <label class="partner-checkbox-label">
+                <input type="checkbox" id="lookingForPartner3" name="lookingForPartner3">
+                <span class="partner-checkbox-custom"></span>
+                <span class="partner-checkbox-text">Ищу партнера</span>
+              </label>
+            </div>
+
+            <div class="form-group partner-name-group">
+              <label for="partnerName3">Имя партнера</label>
+              <input type="text" id="partnerName3" name="partnerName3" placeholder="Введите имя и фамилию партнера">
+            </div>
+          </div>
+
+          <button type="submit" class="tournament-submit-btn">Зарегистрироваться на турнир</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Подвал сайта -->
   <footer class="footer">
     <div class="container">
@@ -176,7 +363,7 @@
         <!-- Логотип и основная информация -->
         <div class="footer-brand">
           <div class="footer-logo-section">
-            <img src="css/img/ChatGPT Image 10 сент. 2025 г., 23_26_04.png" alt="DTM Logo" class="footer-logo">
+            <img src="css/img/photo_5193023805335929580_y-removebg-preview.png" alt="DTM Logo" class="footer-logo">
             <div class="footer-brand-text">
               <h3>DTM Badminton Club</h3>
               <p>Официальный клуб при UTM</p>

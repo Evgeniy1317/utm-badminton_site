@@ -44,7 +44,7 @@ async function initDatabase() {
         });
 
         // Создаем таблицу, если её нет
-        const createTableSql = `
+        const createBookingsTableSql = `
             CREATE TABLE IF NOT EXISTS bookings (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(100) NOT NULL COMMENT 'Имя и фамилия',
@@ -63,9 +63,18 @@ async function initDatabase() {
                 INDEX idx_created_at (created_at)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Таблица записей на тренировки'
         `;
+        const createTournamentTableSql = `
+            CREATE TABLE IF NOT EXISTS tournament_registrations (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                player_name VARCHAR(150) NOT NULL COMMENT 'Имя участника',
+                categories_json JSON NOT NULL COMMENT 'Выбранные категории',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата регистрации'
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Заявки на турниры'
+        `;
 
         const connection = await pool.getConnection();
-        await connection.query(createTableSql);
+        await connection.query(createBookingsTableSql);
+        await connection.query(createTournamentTableSql);
         connection.release();
 
         console.log('✓ База данных инициализирована');
@@ -103,7 +112,10 @@ function serveStaticFile(filePath, res) {
         // Если декодирование не удалось, используем исходный путь
     }
     
-    const fullPath = path.join(__dirname, filePath);
+    // Удаляем ведущий слэш, чтобы path.join не обнулял путь на Windows
+    const relativePath = filePath.startsWith('/') ? filePath.slice(1) : filePath;
+    
+    const fullPath = path.join(__dirname, relativePath);
     
     // Проверка безопасности (предотвращение выхода за пределы директории)
     const normalizedFullPath = path.normalize(fullPath);
@@ -331,6 +343,105 @@ async function handleDeleteAll(req, res) {
     }
 }
 
+async function handleTournamentRegistrationSubmit(req, res) {
+    let body = '';
+    
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+    
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const categories = Array.isArray(formData.categories) ? formData.categories.filter(cat => cat.category) : [];
+            
+            if (!formData.name || formData.name.trim().length < 2) {
+                throw new Error('Имя обязательно для заполнения');
+            }
+            
+            if (categories.length === 0) {
+                throw new Error('Выберите хотя бы одну категорию');
+            }
+            
+            if (!pool) {
+                throw new Error('База данных не инициализирована');
+            }
+            
+            const connection = await pool.getConnection();
+            await connection.query(
+                `INSERT INTO tournament_registrations (player_name, categories_json) VALUES (?, ?)`,
+                [formData.name.trim(), JSON.stringify(categories)]
+            );
+            connection.release();
+            
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                success: true,
+                message: 'Заявка успешно отправлена!'
+            }));
+        } catch (error) {
+            console.error('Ошибка сохранения заявки на турнир:', error);
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                success: false,
+                message: error.message || 'Ошибка при сохранении заявки'
+            }));
+        }
+    });
+}
+
+async function handleGetTournamentRegistrations(req, res) {
+    try {
+        if (!pool) {
+            throw new Error('База данных не инициализирована');
+        }
+        
+        const connection = await pool.getConnection();
+        const [rows] = await connection.query(
+            'SELECT id, player_name, categories_json, created_at FROM tournament_registrations ORDER BY created_at DESC'
+        );
+        connection.release();
+        
+        const registrations = rows.map(row => {
+            let categories = [];
+            try {
+                if (row.categories_json) {
+                    if (typeof row.categories_json === 'string') {
+                        categories = JSON.parse(row.categories_json);
+                    } else if (Buffer.isBuffer(row.categories_json)) {
+                        categories = JSON.parse(row.categories_json.toString('utf8'));
+                    } else if (typeof row.categories_json === 'object') {
+                        categories = row.categories_json;
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка парсинга категорий турнира:', e);
+                categories = [];
+            }
+            
+            return {
+                id: row.id,
+                name: row.player_name,
+                created_at: row.created_at,
+                categories
+            };
+        });
+        
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            success: true,
+            registrations
+        }));
+    } catch (error) {
+        console.error('Ошибка получения заявок на турнир:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            success: false,
+            message: 'Ошибка при получении заявок'
+        }));
+    }
+}
+
 // Создание HTTP сервера
 const server = http.createServer(async (req, res) => {
     // CORS заголовки
@@ -365,6 +476,16 @@ const server = http.createServer(async (req, res) => {
     
     if (pathname === '/api/delete_all' && req.method === 'POST') {
         await handleDeleteAll(req, res);
+        return;
+    }
+    
+    if (pathname === '/api/submit_tournament_registration' && req.method === 'POST') {
+        await handleTournamentRegistrationSubmit(req, res);
+        return;
+    }
+    
+    if (pathname === '/api/get_tournament_registrations' && req.method === 'GET') {
+        await handleGetTournamentRegistrations(req, res);
         return;
     }
     

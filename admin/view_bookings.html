@@ -212,6 +212,29 @@
         .message.show {
             display: block;
         }
+        .tournament-container {
+            margin-top: 32px;
+        }
+        .category-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .category-list li {
+            padding: 6px 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+        }
+        .category-list li span {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
@@ -228,6 +251,19 @@
         
         <div id="stats" class="stats"></div>
         <div id="bookingsTable" class="table-container"></div>
+    </div>
+
+    <div class="container tournament-container">
+        <div class="header">
+            <h1>Участники турниров</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="loadTournamentRegistrations()">🔄 Обновить</button>
+            </div>
+        </div>
+        
+        <div id="tournamentMessage" class="message"></div>
+        <div id="tournamentStats" class="stats"></div>
+        <div id="tournamentTable" class="table-container"></div>
     </div>
 
     <script>
@@ -339,6 +375,110 @@
             }
         }
         
+        async function loadTournamentRegistrations() {
+            const statsDiv = document.getElementById('tournamentStats');
+            const tableDiv = document.getElementById('tournamentTable');
+            
+            if (!statsDiv || !tableDiv) return;
+            
+            tableDiv.innerHTML = '<div class="loading">Загрузка...</div>';
+            
+            try {
+                const response = await fetch('/api/get_tournament_registrations');
+                const data = await response.json();
+                
+                if (data.success && data.registrations) {
+                    const registrations = data.registrations;
+                    
+                    const stats = {
+                        totalPlayers: registrations.length,
+                        totalEntries: registrations.reduce((sum, reg) => sum + reg.categories.length, 0),
+                        singlesEntries: registrations.reduce((sum, reg) => {
+                            return sum + reg.categories.filter(cat => isSinglesCategory(cat.category)).length;
+                        }, 0),
+                        doublesEntries: registrations.reduce((sum, reg) => {
+                            return sum + reg.categories.filter(cat => !isSinglesCategory(cat.category)).length;
+                        }, 0)
+                    };
+                    
+                    statsDiv.innerHTML = `
+                        <div class="stat-card">
+                            <h3>Участников</h3>
+                            <div class="number">${stats.totalPlayers}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Всего заявок</h3>
+                            <div class="number">${stats.totalEntries}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Одиночные</h3>
+                            <div class="number">${stats.singlesEntries}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Парные</h3>
+                            <div class="number">${stats.doublesEntries}</div>
+                        </div>
+                    `;
+                    
+                    if (registrations.length === 0) {
+                        tableDiv.innerHTML = '<div class="no-data"><h3>Заявок пока нет</h3><p>Как только спортсмены зарегистрируются, вы увидите их здесь</p></div>';
+                    } else {
+                        let tableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Участник</th>
+                                        <th>Категории</th>
+                                        <th>Дата регистрации</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        
+                        registrations.forEach(reg => {
+                            const date = new Date(reg.created_at);
+                            const dateStr = date.toLocaleDateString('ru-RU') + ' ' + date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'});
+                            
+                            const categoriesList = reg.categories.map(cat => {
+                                const label = formatCategoryLabel(cat.category);
+                                let note = 'Одиночная заявка';
+                                
+                                if (!isSinglesCategory(cat.category)) {
+                                    note = cat.lookingForPartner
+                                        ? 'Ищет партнера'
+                                        : (cat.partnerName ? `Партнер: ${escapeHtml(cat.partnerName)}` : 'Без партнера');
+                                }
+                                
+                                return `<li><strong>${label}</strong><span>${note}</span></li>`;
+                            }).join('');
+                            
+                            tableHTML += `
+                                <tr>
+                                    <td>${reg.id}</td>
+                                    <td><strong>${escapeHtml(reg.name)}</strong></td>
+                                    <td>
+                                        <ul class="category-list">
+                                            ${categoriesList}
+                                        </ul>
+                                    </td>
+                                    <td>${dateStr}</td>
+                                </tr>
+                            `;
+                        });
+                        
+                        tableHTML += '</tbody></table>';
+                        tableDiv.innerHTML = tableHTML;
+                    }
+                } else {
+                    tableDiv.innerHTML = '<div class="no-data"><h3>Ошибка загрузки данных</h3></div>';
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки турниров:', error);
+                tableDiv.innerHTML = '<div class="no-data"><h3>Ошибка подключения к серверу</h3></div>';
+            }
+        }
+        
         async function updateStatus(id, status) {
             if (!confirm(`Вы уверены, что хотите изменить статус записи #${id}?`)) {
                 return;
@@ -412,6 +552,28 @@
             }, 3000);
         }
         
+        function showTournamentMessage(text, type) {
+            const messageDiv = document.getElementById('tournamentMessage');
+            if (!messageDiv) return;
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type} show`;
+            
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 3000);
+        }
+        
+        function isSinglesCategory(category) {
+            if (!category) return false;
+            const normalized = category.toLowerCase();
+            return normalized.startsWith('ms') || normalized.startsWith('ws');
+        }
+        
+        function formatCategoryLabel(category) {
+            if (!category) return '-';
+            return category.toUpperCase().replace('-', ' ');
+        }
+        
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
@@ -420,9 +582,11 @@
         
         // Загружаем данные при загрузке страницы
         loadBookings();
+        loadTournamentRegistrations();
         
         // Автообновление каждые 10 секунд
         setInterval(loadBookings, 10000);
+        setInterval(loadTournamentRegistrations, 15000);
     </script>
 </body>
 </html>
